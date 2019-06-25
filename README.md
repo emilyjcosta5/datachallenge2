@@ -15,12 +15,12 @@ Challenge Questions
 
 The challenges are:
 
-Develop a machine learning algorithm for space group classification of CBED data.
-Implement proper machine learning techniques to overcome data/label imbalance and show how it affects the performance of the machine learning algorithm in question 1.
-Implement a machine learning algorithm for multitask prediction of a space group, in addition to other material structural properties, and show how it affects the performance of the ML algorithm in question 1.
-Notes on the challenge questions:
+1. Develop a machine learning algorithm for space group classification of CBED data.
+2. Implement proper machine learning techniques to overcome data/label imbalance and show how it affects the performance of the machine learning algorithm in question 1.
+3. Implement a machine learning algorithm for multitask prediction of a space group, in addition to other material structural properties, and show how it affects the performance of the ML algorithm in question 1.
 
-A participant may choose to do questions 1 and 2 or questions 1 and 3. Completing all three questions is optional.
-Regarding approaches to question 2, our preference is for machine learning techniques (e.g., loss weighting, model ensembles, active learning, decision boundary analysis with GANs [generative adversarial networks]) in lieu of brute-force data augmentation approaches (e.g., mixup, random erasing).
-If a deep learning model is used by the participant, our preference is for the implementation to use one of the following frameworks: MXNet, Pytorch or TensorFlow.
-Our preference is for the machine learning algorithms to be implemented in one of the following languages: Python, C/C++, or Julia.
+Notes on the challenge questions:
+1. A participant may choose to do questions 1 and 2 or questions 1 and 3. Completing all three questions is optional.
+2. Regarding approaches to question 2, our preference is for machine learning techniques (e.g., loss weighting, model ensembles, active learning, decision boundary analysis with GANs [generative adversarial networks]) in lieu of brute-force data augmentation approaches (e.g., mixup, random erasing).
+3. If a deep learning model is used by the participant, our preference is for the implementation to use one of the following frameworks: MXNet, Pytorch or TensorFlow.
+4. Our preference is for the machine learning algorithms to be implemented in one of the following languages: Python, C/C++, or Julia.
