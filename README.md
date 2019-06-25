@@ -1,5 +1,6 @@
-# datachallenge2
+# Challenge 2, 2019
 ***Towards a Universal Classifier for Crystallographic Space Groups***
+
 State-of-the-art electron microscopes produce focused electron beams with atomic dimensions that allow the capture of diffraction patterns arising from the interaction of incident electrons with nanoscale material volumes. Backing out the local atomic structure of materials requires compute- and time-intensive analyses of these diffraction patterns (i.e., convergent beam electron diffraction [CBED]). Traditional analyses of CBED requires iterative numerical solutions of partial differential equations and comparison with experimental data to refine the starting material configuration. This process is repeated anew for every newly acquired experimental CBED pattern and/or probed material.
 
 For this dataset, we used newly developed multi-GPU and multinode electron scattering simulation codes on the Summit supercomputer to generate CBED patterns for over 60,000 solid-state materials, representing nearly every known crystal structure. The overarching goals of this data challenge are to (1) explore the suitability of machine learning algorithms in the advanced analysis of CBED and (2) produce a machine learning algorithm capable of overcoming intrinsic difficulties posed by scientific datasets.
