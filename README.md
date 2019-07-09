@@ -24,3 +24,10 @@ Notes on the challenge questions:
 2. Regarding approaches to question 2, our preference is for machine learning techniques (e.g., loss weighting, model ensembles, active learning, decision boundary analysis with GANs [generative adversarial networks]) in lieu of brute-force data augmentation approaches (e.g., mixup, random erasing).
 3. If a deep learning model is used by the participant, our preference is for the implementation to use one of the following frameworks: MXNet, Pytorch or TensorFlow.
 4. Our preference is for the machine learning algorithms to be implemented in one of the following languages: Python, C/C++, or Julia.
+
+Strategies
+***Benchmarking***
+Using accurancy to benchmark machine learning algorithm performance is insufficient and untelling of the perforamce of the algorithm. These benchmarks, in an imbalanced dataset, may suggest sufficient accurancy if most of the dataset is of one class. However, in real world applications, multiple classes must be accurately classified. With this in mind, the following are strategies to approach benchmarking the performance of our machine learning algorithm and the data is processed:
+1. F1 Score, a weighted average of the following techniques:
+	- Precision: classifers exactness. The fraction of events where we correctly declared a result of all instances where the algorithm declared result (whether correct or not).
+	- Recall: classifiers completeness. The fraction of event correctly declared out of all instances where the result is correct.
