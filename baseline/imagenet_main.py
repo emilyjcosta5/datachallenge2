@@ -70,9 +70,9 @@ NUM_IMAGES = {
 }
 
 _NUM_TRAIN_FILES = 1024
-_SHUFFLE_BUFFER = 10000
+_SHUFFLE_BUFFER = 100
 
-DATASET_NAME = 'ImageNet'
+DATASET_NAME = 'SMCDataChallenge'
 
 ###############################################################################
 # Data processing
