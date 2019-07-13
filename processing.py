@@ -10,8 +10,5 @@ import numpy as np
 import 
 
 
-h5_path = ...
-
-
 def determine_imbalance(h5_dataset):
     
