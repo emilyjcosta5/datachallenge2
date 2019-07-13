@@ -35,7 +35,8 @@ Using accurancy to benchmark machine learning algorithm performance is insuffici
 2. 
 ***Determining Imbalance***
 Prior to balacing the data, the extent of the imbalance will be determined. 
-![Alt text]sample_images/histogram_dist.png?raw=true "Histogram")
+
+![Alt text](sample_images/histogram_dist.png?raw=true "Histogram")
 ***Pre-processing the Data***
 In machine learning, imbalanced datasets can cause bias in the results of the algorithm. In order to achieve excellent performance, the datasets are processed before being run through the machine learning algorithm. Typically, in solving a neural network, more data is better. However, if that dataset is large enough and unnecessary, it is possible to reduce the dataset without greatly compromising the performance of the trained system. Taking this into consideration, the following are strategies that may be taken to significantly reduce the imbalance of data:
 1. Under-sampling, delete instances from any classes that might be over-represented. This might be time-consuming and dimish the chances of producing the best performance when run through the machine learning algorithm.
