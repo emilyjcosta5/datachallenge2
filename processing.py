@@ -11,6 +11,7 @@ import os
 import pandas as pd
 import tensorflow as tf
 import hdf5_to_tfrecord
+import pyUSID as usid
 
 
 def display_image(f, key):
@@ -31,7 +32,7 @@ def display_image(f, key):
 
     title = "Index: {}\nSpace Group: {}".format(key, sample.attrs['space_group'])
     plt.title(title)
-    plt.show()
+    plt.savefig('cbed_stack.png')
 
 def display_space_group_dist(f):
     """Display a histogram of space group distribution of 
@@ -41,13 +42,21 @@ def display_space_group_dist(f):
     """
     import matplotlib.pyplot as plt
     import seaborn as sns
+    
     keys = list(f.keys())
     samples = [f[key] for key in keys]
     space_groups = [int(sample.attrs['space_group']) for sample in samples]
     space_groups = pd.Series(space_groups, name="Space Groups Distribution")
     sns.distplot(space_groups)
-    plt.show()
+    plt.savefig('histogram_dist.png')
 
+def show_tree(f):
+    """
+    Displays a tree of the h5.File object
+    Groups and datasets
+    """
+    print("h5 file contains:")
+    usid.io.hdf_utils.print_tree(f)
 
 
 if __name__ == '__main__':
@@ -57,6 +66,7 @@ if __name__ == '__main__':
     f = h5py.File(filename, 'r')
 
     display_space_group_dist(f)
+    show_tree(f)
 
     f.close()
 
