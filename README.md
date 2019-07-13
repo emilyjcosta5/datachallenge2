@@ -40,3 +40,4 @@ In machine learning, imbalanced datasets can cause bias in the results of the al
 1. Under-sampling, delete instances from any classes that might be over-represented. This might be time-consuming and dimish the chances of producing the best performance when run through the machine learning algorithm.
 2. Over-sampling, add copies/synthetic data from under-represented classes. I suspect doing this would cause the dataset to grow too much in size, and it is already quite large. 
 3. In the case of the crystallograhy multi-classes (230 classes!), a strategy would be to find a medium between strategy 1 and 2. One might slowly reduce the excess datapoints of over-represented class until performance drops below some threshold for the 20 (or so) largest classes. After that, over-sampling can be done to bring under-represented classes to the same level of representation. 
+4. Readjust weight 
