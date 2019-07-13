@@ -9,6 +9,8 @@ import h5py
 import numpy as np
 import os
 import pandas as pd
+import tensorflow as tf
+import hdf5_to_tfrecord
 
 
 def display_image(f, key):
@@ -47,6 +49,7 @@ def display_space_group_dist(f):
     plt.show()
 
 
+
 if __name__ == '__main__':
     h5_path = os.getcwd() + "/train"
 
@@ -55,4 +58,5 @@ if __name__ == '__main__':
 
     display_space_group_dist(f)
 
-    
+    f.close()
+
