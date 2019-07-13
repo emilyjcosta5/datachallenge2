@@ -27,6 +27,9 @@ Notes on the challenge questions:
 
 Strategies
 
+Example of dataset (cbed_images):
+![Example_of_Images](sample_images/cbed_images.png?raw=true "Sample_0_0 Images")
+
 ***Benchmarking***
 Using accurancy to benchmark machine learning algorithm performance is insufficient and untelling of the perforamce of the algorithm. These benchmarks, in an imbalanced dataset, may suggest sufficient accurancy if most of the dataset is of one class. However, in real world applications, multiple classes must be accurately classified. With this in mind, the following are strategies to approach benchmarking the performance of our machine learning algorithm and the data is processed:
 1. F1 Score, a weighted average of the following techniques:
