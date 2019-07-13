@@ -9,6 +9,8 @@ import h5py
 import numpy as np
 import os
 import pandas as pd
+import tensorflow as tf
+import hdf5_to_tfrecord
 import pyUSID as usid
 
 
@@ -56,6 +58,7 @@ def show_tree(f):
     print("h5 file contains:")
     usid.io.hdf_utils.print_tree(f)
 
+
 if __name__ == '__main__':
     h5_path = os.getcwd() + "/train"
 
@@ -65,4 +68,5 @@ if __name__ == '__main__':
     display_space_group_dist(f)
     show_tree(f)
 
-    
+    f.close()
+
