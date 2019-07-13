@@ -5,4 +5,13 @@ This program processes data prior to running through ML algorithm.
 My current idea is to do some numeric approach to decide which data is worth keeping
 """
 
+import h5py
+import numpy as np
+import 
 
+
+h5_path = ...
+
+
+def determine_imbalance(h5_dataset):
+    
