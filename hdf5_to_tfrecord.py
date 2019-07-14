@@ -20,20 +20,27 @@ import h5py
 FLAGS = None
 
 
-def read_hdf5(path):
-
+def read_hdf5(f):
+    """
+    Returns two dicts of dicts: images and labels
+        image: key = sample index and 'image_x' string, val = the image in numpy array format
+        label: key = sample index and its space group, val = the space group in numpy array format
+    """
     sets_to_read = ['image_1', 'image_2', 'image_3']
     attrs_to_read = ['space_group']
-    f = h5py.File(path, "r")
-    samples = keys = list(f.keys())
-    samples = [f[key] for key in keys]
-    images = [] # A list of dictionary (key : val) = ('sample_image_whatever' : image in np.array)
-    labels = [] # A list of dictionary (key : val) = ('sample_space_group' : space group in np.array)
+    keys = list(f.keys())
+    images = {} # A list of dictionary (key : val) = ('sample_image_whatever' : image in np.array)
+    labels = {} # A list of dictionary (key : val) = ('sample_space_group' : space group in np.array)
     
     # For each sample, extract 3 images and space group as dicts of np.array
-    for sample in samples:
-        images.append({str(sample) + s: np.array(cbed) for s, cbed in zip(sets_to_read, samples['cbed_stack'])})
-        labels.append({str(sample) + a: np.array(sample.attrs[a]) for a in attrs_to_read})
+    i = 0
+    for key in keys:
+        if i % 1000 == 0:
+            print("Reading HDF5 files: {} - {}".format(i, i+1000))
+        sample = f[key]
+        images[key] = {s: np.array(cbed) for s, cbed in zip(sets_to_read, sample['cbed_stack'])}
+        labels[key] = {a: np.array(sample.attrs[a]) for a in attrs_to_read}
+        i += 1
     f.close()
     
     return (images, labels)
@@ -68,39 +75,27 @@ def convert_to(directory, dataset_name):
 
         for file in files:
             try:
-                data = read_hdf5(file)
+                images, labels = read_hdf5(file)
             except OSError:
                 print("Could not read {}. Skipping.".format(file))
                 continue
 
-            point_cloud = data['point_cloud']
-            labels = data['obj_labels']
-
-            u, counts = np.unique(labels, return_counts=True)
-            for u, count in zip(u, counts):
-                if u in unique_values:
-                    unique_values[u] += count
-                else:
-                    unique_values[u] = count
-
-            num_points = point_cloud.shape[0]
-
-            if num_points != labels.shape[0]:
-                raise RuntimeError("Point cloud size does not match label size in {} ({} vs. {})"
-                                   .format(file, point_cloud.shape[0], labels.shape[0]))
-
-            example = tf.train.Example(
-                features=tf.train.Features(
-                    feature={
-                        'num_points': _int64_feature(num_points),
-                        'points': _float_array_feature(point_cloud.flatten()),
-                        'label': _int_array_feature(labels),
-                    }
+            print("Sample size: {}".format(len(images)))
+            
+            for key in images.keys():
+                image = images[key]
+                label = labels[key]
+                example = tf.train.Example(
+                    features=tf.train.Features(
+                        feature={
+                            'image_1': _float_array_feature(image['image_1']),
+                            'image_2': _float_array_feature(image['image_2']),
+                            'image_3': _float_array_feature(image['image_3']),
+                            'label': _bytes_feature(label['space_group'])
+                        }
+                    )
                 )
-            )
-            writer.write(example.SerializeToString())
-
-        print("Unique values in dataset '{}': {}".format(dataset_name, unique_values))
+                writer.write(example.SerializeToString())
 
 
 def main(unused_argv):
