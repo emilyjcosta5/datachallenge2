@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
-# Copyright 2017
+# @author: Shuto Araki
+# @date: 07/16/2019
 # ==============================================================================
 
 """Converts HDF5 data files to TFRecords file format with Example protos."""
@@ -20,22 +21,37 @@ import h5py
 FLAGS = None
 
 
-def read_hdf5(path):
+def read_hdf5(f):
+    """
+    Returns two `dict`s of `dict`s: `images` and `labels`
 
+    image in `images`: 
+        key = sample index and 'image_x' string, 
+        val = the image in numpy array format
+
+    label in `labels`: 
+        key = sample index and its space group, 
+        val = the space group in numpy array format
+    """
     sets_to_read = ['image_1', 'image_2', 'image_3']
     attrs_to_read = ['space_group']
-    f = h5py.File(path, "r")
-    samples = keys = list(f.keys())
-    samples = [f[key] for key in keys]
-    images = [] # A list of dictionary (key : val) = ('sample_image_whatever' : image in np.array)
-    labels = [] # A list of dictionary (key : val) = ('sample_space_group' : space group in np.array)
+    keys = list(f.keys())
+    images = {} # A dict (key : val) = (sample_index : the image dict)
+    labels = {} # A dict (key : val) = (sample_index : the label dict)
     
     # For each sample, extract 3 images and space group as dicts of np.array
-    for sample in samples:
-        images.append({str(sample) + s: np.array(cbed) for s, cbed in zip(sets_to_read, samples['cbed_stack'])})
-        labels.append({str(sample) + a: np.array(sample.attrs[a]) for a in attrs_to_read})
+    i = 0
+    for key in keys:
+        if i % 1000 == 0:
+            print("Reading HDF5 files: {} - {}".format(i, i+1000))
+        sample = f[key]
+        # numpy.tostring() is a lossy compression for float data (maybe)
+        squish = lambda cbed: np.array([np.interp(cb, (np.amin(cbed), np.amax(cbed)), (1e-16, 1e16)) for cb in cbed]).astype(int)
+        images[key] = {s: squish(cbed).tostring() for s, cbed in zip(sets_to_read, sample['cbed_stack'])}
+        labels[key] = {a: sample.attrs[a] for a in attrs_to_read}
+        i += 1
     f.close()
-    
+
     return (images, labels)
 
 
@@ -58,53 +74,43 @@ def _bytes_feature(value):
 def convert_to(directory, dataset_name):
 
     files = sorted([os.path.join(directory, file) for file in os.listdir(directory) if file.endswith('.h5')])
-
+    files = files[:10] # For testing on Summit
     filename = os.path.join(directory, dataset_name + '.tfrecords')
     print('Writing', filename)
 
-    with tf.python_io.TFRecordWriter(filename) as writer:
-
-        unique_values = {}
+    with tf.io.TFRecordWriter(filename) as writer:
 
         for file in files:
             try:
-                data = read_hdf5(file)
+                f = h5py.File(file, 'r')
+                images, labels = read_hdf5(f)
+                f.close()
             except OSError:
-                print("Could not read {}. Skipping.".format(file))
+                print("\tCould not read {}. Skipping.".format(file))
                 continue
 
-            point_cloud = data['point_cloud']
-            labels = data['obj_labels']
-
-            u, counts = np.unique(labels, return_counts=True)
-            for u, count in zip(u, counts):
-                if u in unique_values:
-                    unique_values[u] += count
-                else:
-                    unique_values[u] = count
-
-            num_points = point_cloud.shape[0]
-
-            if num_points != labels.shape[0]:
-                raise RuntimeError("Point cloud size does not match label size in {} ({} vs. {})"
-                                   .format(file, point_cloud.shape[0], labels.shape[0]))
-
-            example = tf.train.Example(
-                features=tf.train.Features(
-                    feature={
-                        'num_points': _int64_feature(num_points),
-                        'points': _float_array_feature(point_cloud.flatten()),
-                        'label': _int_array_feature(labels),
-                    }
+            print("\tSample size: {}".format(len(images)))
+            
+            for key in images.keys():
+                print("\tProcessing {}...".format(key))
+                image = images[key]
+                label = labels[key]
+                example = tf.train.Example(
+                    features=tf.train.Features(
+                        feature={
+                            'image_1': _bytes_feature(image['image_1']),
+                            'image_2': _bytes_feature(image['image_2']),
+                            'image_3': _bytes_feature(image['image_3']),
+                            'label': _bytes_feature(label['space_group'])
+                        }
+                    )
                 )
-            )
-            writer.write(example.SerializeToString())
-
-        print("Unique values in dataset '{}': {}".format(dataset_name, unique_values))
+                writer.write(example.SerializeToString())
 
 
 def main(unused_argv):
     convert_to(FLAGS.train_dir, 'train_tfrecord')
+    # convert_to(FLAGS.train_dir, 'val_tfrecord')
 
 
 if __name__ == '__main__':
@@ -120,7 +126,7 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--train_dir', metavar='directory', type=is_valid_folder)
-    parser.add_argument('--val_dir', metavar='directory', type=is_valid_folder)
+    # parser.add_argument('--val_dir', metavar='directory', type=is_valid_folder)
 
     FLAGS, unparsed = parser.parse_known_args()
     tf.app.run(main=main, argv=[sys.argv[0]] + unparsed)
