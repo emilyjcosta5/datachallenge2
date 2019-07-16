@@ -85,6 +85,7 @@ def reconstruction_test(sample_index=0):
     fig, axes = plt.subplots(2, 3, figsize=(16, 12))
     for ax, cbed in zip(axes[0], cbed_stack):
         ax.imshow(cbed**0.25)
+    original = [cbed for cbed in cbed_stack]
     f.close()
 
     filename = os.path.join(h5_path, "train_223.tfrecords")
@@ -122,6 +123,13 @@ def reconstruction_test(sample_index=0):
     for i, ax in enumerate(axes[1]):
         image = images['image_{}'.format(i+1)].numpy()
         ax.imshow(image ** 0.25)
+
+    reconstructed = [image.numpy() for image in images.values()]
+    print(original)
+    print(reconstructed)
+    result = np.allclose(original, reconstructed)
+    print("Result:", result)
+
     label = label.numpy()
     plt.title("Label: " + repr(label))
     plt.show()
