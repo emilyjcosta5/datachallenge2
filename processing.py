@@ -85,7 +85,9 @@ def read_hdf5(f):
         if i % 1000 == 0:
             print("Reading HDF5 files: {} - {}".format(i, i+1000))
         sample = f[key]
-        images[key] = {s: cbed.tostring() for s, cbed in zip(sets_to_read, sample['cbed_stack'])}
+        # numpy.tostring() is a lossy compression for float data (maybe)
+        # images[key] = {s: cbed.tostring() for s, cbed in zip(sets_to_read, sample['cbed_stack'])}
+        images[key] = {s: cbed for s, cbed in zip(sets_to_read, sample['cbed_stack'])}
         labels[key] = {a: sample.attrs[a] for a in attrs_to_read}
         i += 1
     f.close()
@@ -136,9 +138,9 @@ def convert_to(directory, dataset_name):
                 example = tf.train.Example(
                     features=tf.train.Features(
                         feature={
-                            'image_1': _bytes_feature(image['image_1']),
-                            'image_2': _bytes_feature(image['image_2']),
-                            'image_3': _bytes_feature(image['image_3']),
+                            'image_1': _float_array_feature(image['image_1'].flatten()),
+                            'image_2': _float_array_feature(image['image_2'].flatten()),
+                            'image_3': _float_array_feature(image['image_3'].flatten()),
                             'label': _bytes_feature(label['space_group'])
                         }
                     )
@@ -158,45 +160,107 @@ def reconstruction_test():
     # Display the images
     fig, axes = plt.subplots(2, 3, figsize=(16, 12))
     for ax, cbed in zip(axes[0], cbed_stack):
-        print(type(cbed))
         ax.imshow(cbed**0.25)
     f.close()
 
     filename = os.path.join(h5_path, "train_223.tfrecords")
     tfdataset = tf.data.TFRecordDataset([filename])
+
     def _parse_function(example_proto):
         # Create a description of the features.
         feature_description = {
-            'image_1': tf.io.FixedLenFeature([], dtype=tf.string),
-            'image_2': tf.io.FixedLenFeature([], dtype=tf.string),
-            'image_3': tf.io.FixedLenFeature([], dtype=tf.string),
+            'image_1': tf.io.FixedLenFeature([512, 512, 4], dtype=tf.float32),
+            'image_2': tf.io.FixedLenFeature([512, 512, 4], dtype=tf.float32),
+            'image_3': tf.io.FixedLenFeature([512, 512, 4], dtype=tf.float32),
             'label': tf.io.FixedLenFeature([], dtype=tf.string, default_value=''),
         }
         parsed = tf.io.parse_single_example(example_proto, feature_description)
 
         def reshape_image(image_name):
-            image = tf.decode_raw(parsed[image_name], tf.uint8)
-            height = tf.cast(512, tf.int32)
-            width = tf.cast(512, tf.int32)
-            image = tf.reshape(image, [height, width, 4])
+            # Lossy extraction
+            # image = tf.decode_raw(parsed[image_name], tf.uint8)
+            image = parsed[image_name]
+            # image = tf.decode_raw(parsed[image_name], tf.float32)
+            # image = tf.image.decode_image(parsed[image_name], channels=4, dtype=tf.float32)
+            height = 512
+            width = 512
+            # image = tf.reshape(image, [height, width, 4])
+            image.set_shape([height, width, 4])
             return image
         
-        image_1 = reshape_image('image_1')
-        image_2 = reshape_image('image_2')
-        image_3 = reshape_image('image_3')
+        # image_1 = reshape_image('image_1')
+        # image_2 = reshape_image('image_2')
+        # image_3 = reshape_image('image_3')
+        image_1 = parsed['image_1']
+        image_2 = parsed['image_2']
+        image_3 = parsed['image_3']
+        print(image_3)
         label = tf.cast(parsed['label'], tf.string)
         images = {'image_1': image_1, 'image_2': image_2, 'image_3': image_3}
         return images, label
 
     parsed_dataset = tfdataset.map(_parse_function)
-    iterator = parsed_dataset.make_one_shot_iterator()
-    images = iterator.get_next()[0]
+    iterator = tf.compat.v1.data.make_one_shot_iterator(parsed_dataset)
+    print(type(iterator))
+    images = iterator.get_next()
+    print(images)
     for i, ax in enumerate(axes[1]):
         print(i)
         image = images['image_{}'.format(i+1)].numpy()
         ax.imshow(image)
     plt.show()
+
+# def reconstruction_test():
+#     h5_path = os.getcwd() + "/train"
+#     filename = os.path.join(h5_path, "batch_train_223.h5")
+#     import matplotlib.pyplot as plt
     
+#     f = h5py.File(filename, 'r')
+#     sample = f['sample_0_1']
+#     # This is the image dataset (array/file)
+#     cbed_stack = sample['cbed_stack']
+#     # Display the images
+#     fig, axes = plt.subplots(2, 3, figsize=(16, 12))
+#     for ax, cbed in zip(axes[0], cbed_stack):
+#         print(type(cbed))
+#         ax.imshow(cbed**0.25)
+#     f.close()
+
+#     filename = os.path.join(h5_path, "train_223_naive.tfrecords")
+#     tfdataset = tf.data.TFRecordDataset([filename])
+#     def _parse_function(example_proto):
+#         # Create a description of the features.
+#         feature_description = {
+#             'image_1': tf.io.FixedLenFeature([], dtype=tf.string),
+#             'image_2': tf.io.FixedLenFeature([], dtype=tf.string),
+#             'image_3': tf.io.FixedLenFeature([], dtype=tf.string),
+#             'label': tf.io.FixedLenFeature([], dtype=tf.string, default_value=''),
+#         }
+#         parsed = tf.io.parse_single_example(example_proto, feature_description)
+
+#         def reshape_image(image_name):
+#             image = tf.decode_raw(parsed[image_name], tf.uint8)
+#             height = tf.cast(512, tf.int32)
+#             width = tf.cast(512, tf.int32)
+#             image = tf.reshape(image, [height, width, 4])
+#             return image
+        
+#         image_1 = reshape_image('image_1')
+#         image_2 = reshape_image('image_2')
+#         image_3 = reshape_image('image_3')
+#         label = tf.cast(parsed['label'], tf.string)
+#         images = {'image_1': image_1, 'image_2': image_2, 'image_3': image_3}
+#         print(images)
+#         return images, label
+
+#     parsed_dataset = tfdataset.map(_parse_function)
+#     iterator = parsed_dataset.make_one_shot_iterator()
+#     images = iterator.get_next()[0]
+#     for i, ax in enumerate(axes[1]):
+#         print(i)
+#         image = images['image_{}'.format(i+1)].numpy()
+#         ax.imshow(image)
+#     plt.show()
 
 if __name__ == '__main__':
     '''
@@ -243,5 +307,7 @@ if __name__ == '__main__':
         print(repr(parsed_record))
     
     '''
+    h5_path = os.getcwd() + "/train"
+    convert_to(h5_path, 'train_223')
     tf.compat.v1.enable_eager_execution()
     reconstruction_test()
