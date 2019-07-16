@@ -68,6 +68,7 @@ def reconstruction_test(sample_index=0):
     Args:
         sample_index = takes the `i`th sample
     """
+    # Set proper names from the index
     if sample_index < 10:
         sample_name = 'sample_0_{}'.format(sample_index)
     else:
@@ -83,11 +84,10 @@ def reconstruction_test(sample_index=0):
     cbed_stack = sample['cbed_stack']
     fig, axes = plt.subplots(2, 3, figsize=(16, 12))
     for ax, cbed in zip(axes[0], cbed_stack):
-        print(type(cbed))
         ax.imshow(cbed**0.25)
     f.close()
 
-    filename = os.path.join(h5_path, "train_223_naive.tfrecords")
+    filename = os.path.join(h5_path, "train_223.tfrecords")
     tfdataset = tf.data.TFRecordDataset([filename])
     def _parse_function(example_proto):
         # Create a description of the features.
@@ -122,11 +122,13 @@ def reconstruction_test(sample_index=0):
     for i, ax in enumerate(axes[1]):
         image = images['image_{}'.format(i+1)].numpy()
         ax.imshow(image ** 0.25)
-    plt.title(label)
+    label = label.numpy()
+    plt.title("Label: " + repr(label))
     plt.show()
 
 if __name__ == '__main__':
     h5_path = os.getcwd() + "/train"
-    convert_to(h5_path, 'train_223')
+    # convert_to(h5_path, 'train_223')
     tf.compat.v1.enable_eager_execution()
-    reconstruction_test(10)
+    # Try different indices!
+    reconstruction_test(8)

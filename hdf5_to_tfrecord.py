@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
-# Copyright 2017
+# @author: Shuto Araki
+# @date: 07/16/2019
 # ==============================================================================
 
 """Converts HDF5 data files to TFRecords file format with Example protos."""
