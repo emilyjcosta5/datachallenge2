@@ -50,6 +50,19 @@ def display_space_group_dist(f):
     sns.distplot(space_groups)
     plt.savefig('histogram_dist.png')
 
+def know_space_groups(f):
+    dist = np.zeros(230, dtype=int)
+    keys = list(f.keys())
+    samples = [f[key] for key in keys]
+    space_groups = [int(sample.attrs['space_group']) for sample in samples]
+    for space_group in space_groups:
+        dist[space_group - 1] += 1
+
+def iterate_through_data():
+    for file in files:
+        try:
+            #open a file and run through know_space_groups
+
 def show_tree(f):
     """
     Displays a tree of the h5.File object
