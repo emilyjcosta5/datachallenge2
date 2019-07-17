@@ -57,11 +57,24 @@ def know_space_groups(f):
     space_groups = [int(sample.attrs['space_group']) for sample in samples]
     for space_group in space_groups:
         dist[space_group - 1] += 1
+    return dist
 
 def iterate_through_data():
     for file in files:
         try:
             #open a file and run through know_space_groups
+            dist = know_space_groups(f)
+        except OSError:
+            print('Could not read {}. Skipping.'.format(file)) 
+    dist_all = add(dist_all, dist)
+
+# helper function for adding newly found space groups to array of already found
+@cuda.jit
+def add(x, y, dist_all):
+    start = cuda.grid(1)
+    stride = cuda.gridsize(1)
+    for i in range(start, x.shape[0], stride):
+        dist_all[i] = x[i] + y[i]
 
 def show_tree(f):
     """
