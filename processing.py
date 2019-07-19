@@ -13,7 +13,8 @@ import tensorflow as tf
 import hdf5_to_tfrecord
 import pyUSID as usid
 from numba import cuda
-
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 def display_image(f, key):
     """Display 3 images for a given sample index.
@@ -41,9 +42,6 @@ def display_space_group_dist(f):
     Args:
         f: h5py.File object
     """
-    import matplotlib.pyplot as plt
-    import seaborn as sns
-    
     keys = list(f.keys())
     samples = [f[key] for key in keys]
     space_groups = [int(sample.attrs['space_group']) for sample in samples]
@@ -60,12 +58,11 @@ def _know_space_groups(f):
         dist[space_group - 1] += 1
     return dist
 
-def iterate_through_data(directory, dataset_name, save_fig=False, fig_name=None):
+def iterate_through_data(directory, save_fig=False, fig_name=None):
     '''
     Parameters
     ---------
     directory: String
-    dataset_name: String
     save_fig: boolean (optional)
     Whether or not to save a figure visualizing distribution in data
     fig_name: String (optional)
@@ -86,12 +83,16 @@ def iterate_through_data(directory, dataset_name, save_fig=False, fig_name=None)
     for file in files:
         try:
             #open a file and run through know_space_groups
-            dist = _know_space_groups(file)
+            filename = os.path.join(h5_path, file)
+            f = h5py.File(filename, 'r')
+            dist = _know_space_groups(f)
         except OSError:
             print('Could not read {}. Skipping.'.format(file)) 
-        vals = _add(dist_all, dist)
+        vals = np.add(vals, dist)
+        #vals = _add(vals, dist)
     keys = np.arange(1, 231, dtype=int)
-    for key, val in keys,vals:
+    dict_dist = {}
+    for key,val in zip(keys,vals):
         dict_dist['Space Group {}'.format(key)] = val
     if save_fig:
         if fig_name is None:
@@ -131,7 +132,7 @@ if __name__ == '__main__':
 
     #display_space_group_dist(f)
     show_tree(f)
-    dict_dist = iterate_through_data(h5_path, 'cbed_stack', save_fig=True)
+    dict_dist = iterate_through_data(h5_path, save_fig=True)
     print_space_group_distribution(dict_dist)
     f.close()
 
