@@ -12,6 +12,7 @@ import pandas as pd
 import tensorflow as tf
 import hdf5_to_tfrecord
 import pyUSID as usid
+from numba import cuda
 
 
 def display_image(f, key):
@@ -50,7 +51,7 @@ def display_space_group_dist(f):
     sns.distplot(space_groups)
     plt.savefig('histogram_dist.png')
 
-def know_space_groups(f):
+def _know_space_groups(f):
     dist = np.zeros(230, dtype=int)
     keys = list(f.keys())
     samples = [f[key] for key in keys]
@@ -59,18 +60,55 @@ def know_space_groups(f):
         dist[space_group - 1] += 1
     return dist
 
-def iterate_through_data():
+def iterate_through_data(directory, dataset_name, save_fig=False, fig_name=None):
+    '''
+    Parameters
+    ---------
+    directory: String
+    dataset_name: String
+    save_fig: boolean (optional)
+    Whether or not to save a figure visualizing distribution in data
+    fig_name: String (optional)
+    What to name plot if saved
+
+    Returns
+    ---------
+    dist_all: Dictionary
+    Keys are space groups
+    Values are amount of
+
+    '''
+    #if save_fig and fig_name=None:
+    #    print('No plot name specified, will name plot space_grp_dist')
+    #    fig_name = 'space_grp_dist'
+    files = sorted([os.path.join(directory, file) for file in os.listdir(directory) if file.endswith('.h5')])
+    vals = np.zeros(230, dtype=int)
     for file in files:
         try:
             #open a file and run through know_space_groups
-            dist = know_space_groups(f)
+            dist = _know_space_groups(file)
         except OSError:
             print('Could not read {}. Skipping.'.format(file)) 
-    dist_all = add(dist_all, dist)
+        vals = _add(dist_all, dist)
+    keys = np.arange(1, 231, dtype=int)
+    for key, val in keys,vals:
+        dict_dist['Space Group {}'.format(key)] = val
+    if save_fig:
+        if fig_name is None:
+            print('No plot name specified, will name plot space_grp_dist')
+            fig_name = 'space_grp_dist'
+        space_grp = pd.Series(vals, name="Space Group Distribution")
+        sns.distplot(space_grp)
+        plt.savefig(fig_name + '.png') 
+    return dict_dist
+
+def print_space_group_distribution(dict_dist):
+    for key, val in dict_dist.items():
+        print(key, val)
 
 # helper function for adding newly found space groups to array of already found
 @cuda.jit
-def add(x, y, dist_all):
+def _add(x, y, dist_all):
     start = cuda.grid(1)
     stride = cuda.gridsize(1)
     for i in range(start, x.shape[0], stride):
@@ -91,8 +129,9 @@ if __name__ == '__main__':
     filename = os.path.join(h5_path, "batch_train_223.h5")
     f = h5py.File(filename, 'r')
 
-    display_space_group_dist(f)
+    #display_space_group_dist(f)
     show_tree(f)
-
+    dict_dist = iterate_through_data(h5_path, 'cbed_stack', save_fig=True)
+    print_space_group_distribution(dict_dist)
     f.close()
 
