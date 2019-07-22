@@ -123,7 +123,7 @@ def show_tree(f):
     print("h5 file contains:")
     usid.io.hdf_utils.print_tree(f)
 
-
+'''
 if __name__ == '__main__':
     h5_path = os.getcwd() + "/train"
 
@@ -135,4 +135,5 @@ if __name__ == '__main__':
     dict_dist = iterate_through_data(h5_path, save_fig=True)
     print_space_group_distribution(dict_dist)
     f.close()
+'''
 
