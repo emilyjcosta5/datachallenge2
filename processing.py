@@ -11,8 +11,8 @@ import os
 import pandas as pd
 import tensorflow as tf
 import hdf5_to_tfrecord
-import pyUSID as usid
-from numba import cuda
+#import pyUSID as usid
+#from numba import cuda
 import matplotlib.pyplot as plt
 import seaborn as sns
 import json
@@ -84,9 +84,9 @@ def iterate_through_data(directory, save_fig=False, fig_name=None):
     for file in files:
         try:
             #open a file and run through know_space_groups
-            filename = os.path.join(h5_path, file)
-            f = h5py.File(filename, 'r')
+            f = h5py.File(file, 'r')
             dist = _know_space_groups(f)
+            print('Found distribution of{}'.format(file))
         except OSError:
             print('Could not read {}. Skipping.'.format(file)) 
         vals = np.add(vals, dist)
@@ -94,7 +94,8 @@ def iterate_through_data(directory, save_fig=False, fig_name=None):
     keys = np.arange(1, 231, dtype=int)
     dict_dist = {}
     for key,val in zip(keys,vals):
-        dict_dist['Space Group {}'.format(key)] = val
+        dict_dist['Space Group {}'.format(key)] = val.item()
+    print('Dictionary created.')
     if save_fig:
         if fig_name is None:
             print('No plot name specified, will name plot space_grp_dist')
@@ -111,7 +112,7 @@ def print_space_group_distribution(dict_dist):
 def save_space_grp_distribution(dict_dist, file_name='distribution'):
     with open('{}.json'.format(file_name), 'w') as fp:
         json.dump(dict_dist, fp)
-
+'''
 # helper function for adding newly found space groups to array of already found
 @cuda.jit
 def _add(x, y, dist_all):
@@ -128,7 +129,7 @@ def show_tree(f):
     print("h5 file contains:")
     usid.io.hdf_utils.print_tree(f)
 
-'''
+
 if __name__ == '__main__':
     h5_path = os.getcwd() + "/train"
 
