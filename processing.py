@@ -106,6 +106,14 @@ def iterate_through_data(directory, save_fig=False, fig_name=None):
     return dict_dist
 
 def print_space_group_distribution(dict_dist):
+'''
+Prints out all keys and values in the dictionary of  Space Group distribution
+    Parameters
+    -------------
+    dict_dist: Dictionary object
+    Keys are space groups
+    Values are amount of  
+'''
     for key, val in dict_dist.items():
         print(key, val)
         
