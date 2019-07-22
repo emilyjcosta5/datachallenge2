@@ -15,6 +15,7 @@ import pyUSID as usid
 from numba import cuda
 import matplotlib.pyplot as plt
 import seaborn as sns
+import json
 
 def display_image(f, key):
     """Display 3 images for a given sample index.
@@ -106,6 +107,10 @@ def iterate_through_data(directory, save_fig=False, fig_name=None):
 def print_space_group_distribution(dict_dist):
     for key, val in dict_dist.items():
         print(key, val)
+        
+def save_space_grp_distribution(dict_dist, file_name='distribution'):
+    with open('{}.json'.format(file_name), 'w') as fp:
+        json.dump(dict_dist, fp)
 
 # helper function for adding newly found space groups to array of already found
 @cuda.jit
