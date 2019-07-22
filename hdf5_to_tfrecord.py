@@ -42,8 +42,9 @@ def read_hdf5(f):
     # For each sample, extract 3 images and space group as dicts of np.array
     i = 0
     for key in keys:
-        if i % 1000 == 0:
-            print("Reading HDF5 files: {} - {}".format(i, i+1000))
+        print("Processing", key)
+        if i % 10 == 0: 
+            print("Reading HDF5 files: {} - {}".format(i, i+10))
         sample = f[key]
         # numpy.tostring() is a lossy compression for float data (maybe)
         squish = lambda cbed: np.array([np.interp(cb, (np.amin(cbed), np.amax(cbed)), (1e-16, 1e16)) for cb in cbed]).astype(int)
@@ -71,11 +72,11 @@ def _bytes_feature(value):
     return tf.train.Feature(bytes_list=tf.train.BytesList(value=[value]))
 
 
-def convert_to(directory, dataset_name):
+def convert_to(from_dir, to_dir, dataset_name):
 
-    files = sorted([os.path.join(directory, file) for file in os.listdir(directory) if file.endswith('.h5')])
-    files = files[:10] # For testing on Summit
-    filename = os.path.join(directory, dataset_name + '.tfrecords')
+    files = sorted([os.path.join(from_dir, file) for file in os.listdir(from_dir) if file.endswith('.h5')])
+    files = files[:5] # For testing on Summit
+    filename = os.path.join(to_dir, dataset_name + '.tfrecords')
     print('Writing', filename)
 
     with tf.io.TFRecordWriter(filename) as writer:
@@ -109,8 +110,8 @@ def convert_to(directory, dataset_name):
 
 
 def main(unused_argv):
-    convert_to(FLAGS.train_dir, 'train_tfrecord')
-    # convert_to(FLAGS.train_dir, 'val_tfrecord')
+    convert_to(FLAGS.train_dir, '/ccs/home/shutoaraki/challenge_all_data/train', 'train_tfrecord')
+    # convert_to(FLAGS.train_dir, './data/val', 'val_tfrecord')
 
 
 if __name__ == '__main__':

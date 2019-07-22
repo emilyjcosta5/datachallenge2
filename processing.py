@@ -11,7 +11,7 @@ import os
 import pandas as pd
 import tensorflow as tf
 from hdf5_to_tfrecord import convert_to
-import pyUSID as usid
+#import pyUSID as usid
 
 
 def display_image(f, key):
@@ -135,8 +135,9 @@ def reconstruction_test(sample_index=0):
     plt.show()
 
 if __name__ == '__main__':
-    h5_path = os.getcwd() + "/train"
-    # convert_to(h5_path, 'train_223')
+    h5_path = "/gpfs/alpine/world-shared/stf011/junqi/smc/train" 
+    save_to = "/ccs/home/shutoaraki/challenge_all_data/train" 
+    convert_to(h5_path, save_to, 'train_tfrecord')
     tf.compat.v1.enable_eager_execution()
     # Try different indices!
     reconstruction_test(8)
