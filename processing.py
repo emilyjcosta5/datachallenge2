@@ -112,8 +112,33 @@ def print_space_group_distribution(dict_dist):
 def save_space_grp_distribution(dict_dist, file_name='distribution'):
     with open('{}.json'.format(file_name), 'w') as fp:
         json.dump(dict_dist, fp)
-'''
+
+def visualize_dict(dict_dist):
+    space_grp = pd.Series(vals, name="Space Group Distribution")
+    sns.distplot(space_grp)
+    plt.savefig('space_grp_dist.png')
+
+def visualize_JSON(json_file):
+    with open(json_file, 'r') as f:
+        data = json.load(f)
+        print(data)
+        print(data['Space Group 1'])
+        data = list(data.values())
+        print(data)
+        x = np.arange(1,231)
+        plt.plot(x, data)
+        plt.xlabel('Space Group')
+        plt.ylabel('Amount')
+        plt.title('Space Group Distribution')
+        plt.axis([1,230,0,13000])
+        #space_grp = pd.Series(data, name="Space Group Distribution")
+        #sns.distplot(space_grp)
+        plt.savefig('distribution1.png')
+    #my_dict = json.loads(open(json_file))
+    #visualize_dict(my_dict)
+
 # helper function for adding newly found space groups to array of already found
+'''
 @cuda.jit
 def _add(x, y, dist_all):
     start = cuda.grid(1)
@@ -128,18 +153,18 @@ def show_tree(f):
     """
     print("h5 file contains:")
     usid.io.hdf_utils.print_tree(f)
-
-
+'''
 if __name__ == '__main__':
-    h5_path = os.getcwd() + "/train"
+    #h5_path = os.getcwd() + "/train"
 
-    filename = os.path.join(h5_path, "batch_train_223.h5")
-    f = h5py.File(filename, 'r')
+    #filename = os.path.join(h5_path, "batch_train_223.h5")
+    #f = h5py.File(filename, 'r')
 
     #display_space_group_dist(f)
-    show_tree(f)
-    dict_dist = iterate_through_data(h5_path, save_fig=True)
-    print_space_group_distribution(dict_dist)
-    f.close()
-'''
+    #show_tree(f)
+    #dict_dist = iterate_through_data(h5_path, save_fig=True)
+    #print_space_group_distribution(dict_dist)
+    #f.close()
+    visualize_JSON("distribution.json")
+
 
