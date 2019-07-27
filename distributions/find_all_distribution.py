@@ -4,13 +4,16 @@ Created on: 7.27.2019
 Author: Emily Costa
 '''
 
+import pandas as pd
+from pandas import DataFrame
 import json
 import numpy as np
 
-def convert_JSON_to_dict(j):
+def convert_JSON_to_arr(j):
     with open(j, 'r') as f:
         data = json.load(f)
-        data = np.array(list(data.values()))
+        nums = list(range(1,231))
+        data = np.array([data['Space Group {}'.format(num)] for num in nums])
     return data
         
 
@@ -36,6 +39,27 @@ def make_JSON_from_Dicts(dict_arrs, file_name='overall_distribution'):
     with open('{}.json'.format(file_name), 'w') as fp:
         json.dump(dict_all, fp)
 
+def create_df(headers,arrs):
+    '''
+    arrs: List of Dictionaries
+    keys are headers of data, strings
+    vals is data, numpy array
+    '''
+    #overall = []
+    #headers = []
+    #for key,val in zip(header,arrs):
+    #    overall.append(arr.value())
+    #    headers.append(arr.keys())
+    data_dict = dict(zip(headers,arrs))
+    grps = list(range(1,231))
+    df = DataFrame(data_dict,index=['Space Group {}'.format(grp) for grp in grps])
+    df.to_csv('distribution.csv', header=True)
+    #description = df.describe()
+    #description.to_csv('distribution.csv', header=True)
+
 if __name__ == '__main__':
-    all = [convert_JSON_to_dict('distribution.json'),convert_JSON_to_dict('distributionDev.json'),convert_JSON_to_dict('distributionTest.json')]
-    make_JSON_from_Dicts(all)
+     files = ['overall_distribution.json', 'distribution.json', 'distributionDev.json', 'distributionTest.json']
+     arrs = [convert_JSON_to_arr(file) for file in files]
+     headers = ['Overall', 'Train', 'Dev', 'Test']
+     create_df(headers,arrs)
+
