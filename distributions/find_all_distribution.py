@@ -53,13 +53,19 @@ def create_df(headers,arrs):
     data_dict = dict(zip(headers,arrs))
     grps = list(range(1,231))
     df = DataFrame(data_dict,index=['Space Group {}'.format(grp) for grp in grps])
+    return df
+
+def save_pd_to_csv(df):
     df.to_csv('distribution.csv', header=True)
-    #description = df.describe()
-    #description.to_csv('distribution.csv', header=True)
+
+def describe_data(df,file_name='description'):
+    description = df.describe()
+    description.to_csv('{}.csv'.format(file_name), header=True)
 
 if __name__ == '__main__':
      files = ['overall_distribution.json', 'distribution.json', 'distributionDev.json', 'distributionTest.json']
      arrs = [convert_JSON_to_arr(file) for file in files]
      headers = ['Overall', 'Train', 'Dev', 'Test']
-     create_df(headers,arrs)
+     df = create_df(headers,arrs)
+     describe_data(df)
 
