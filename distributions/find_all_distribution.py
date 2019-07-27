@@ -3,7 +3,8 @@ For finding and visualizing distributions from HDF5 files containing Crystallogr
 Created on: 7.27.2019
 Author: Emily Costa
 '''
-
+import seaborn as sns
+import matplotlib.pyplot as pl
 import pandas as pd
 from pandas import DataFrame
 import json
@@ -62,10 +63,15 @@ def describe_data(df,file_name='description'):
     description = df.describe()
     description.to_csv('{}.csv'.format(file_name), header=True)
 
+def visualize_all(df,headers,colors,file_name='all_distributions'):
+    sns.distplot([df[header] for header in headers], color=colors)
+    plt.savefig('{}.png'.format(file_name))
+
 if __name__ == '__main__':
      files = ['overall_distribution.json', 'distribution.json', 'distributionDev.json', 'distributionTest.json']
      arrs = [convert_JSON_to_arr(file) for file in files]
      headers = ['Overall', 'Train', 'Dev', 'Test']
+     colors = ['blue','m','mediumvioletred','chartreuse']
      df = create_df(headers,arrs)
-     describe_data(df)
-
+     visualize_all(df, headers,colors)
+    
