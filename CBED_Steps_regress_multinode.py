@@ -194,7 +194,7 @@ K.set_session(tf.Session(config=config))
 
 
 thickness = '200A'
-folder_path = r'./simulations/results'
+folder_path = r'/gpfs/alpine/world-shared/stf011/junqi/smc/' 
 thicknesses = os.listdir(folder_path)
 
 #Get the max step number for each thickness, store in a dict

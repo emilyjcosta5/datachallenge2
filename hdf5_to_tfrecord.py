@@ -17,9 +17,7 @@ import tensorflow as tf
 import numpy as np
 import h5py
 
-
 FLAGS = None
-
 
 def read_hdf5(f):
     """
@@ -47,7 +45,7 @@ def read_hdf5(f):
             print("Reading HDF5 files: {} - {}".format(i, i+10))
         sample = f[key]
         # numpy.tostring() is a lossy compression for float data (maybe)
-        squish = lambda cbed: np.array([np.interp(cb, (np.amin(cbed), np.amax(cbed)), (1e-16, 1e16)) for cb in cbed]).astype(int)
+        squish = lambda cbed: np.array([np.interp(cb, (np.amin(cbed), np.amax(cbed)), (0, 255)) for cb in cbed]).astype(int)
         images[key] = {s: squish(cbed).tostring() for s, cbed in zip(sets_to_read, sample['cbed_stack'])}
         labels[key] = {a: sample.attrs[a] for a in attrs_to_read}
         i += 1
@@ -72,11 +70,12 @@ def _bytes_feature(value):
     return tf.train.Feature(bytes_list=tf.train.BytesList(value=[value]))
 
 
-def convert_to(from_dir, to_dir, dataset_name):
+def convert_to(from_dir, to_dir, dataset_name, start):
 
     files = sorted([os.path.join(from_dir, file) for file in os.listdir(from_dir) if file.endswith('.h5')])
-    files = files[:5] # For testing on Summit
+    files = files[start:start+2] # For testing on Summit
     filename = os.path.join(to_dir, dataset_name + '.tfrecords')
+    print(files)
     print('Writing', filename)
 
     with tf.io.TFRecordWriter(filename) as writer:
@@ -110,7 +109,14 @@ def convert_to(from_dir, to_dir, dataset_name):
 
 
 def main(unused_argv):
-    convert_to(FLAGS.train_dir, '/ccs/home/shutoaraki/challenge_all_data/train', 'train_tfrecord')
+    i = 0
+    while True:
+        try:
+            convert_to(from_dir=FLAGS.train_dir, to_dir='/ccs/home/shutoaraki/challenge_all_data/train', dataset_name='train-{:05d}-of-01024'.format(i), start=i)
+            i += 2 
+        except:
+            print("Done processing {} files!".format(i))
+            break
     # convert_to(FLAGS.train_dir, './data/val', 'val_tfrecord')
 
 
@@ -130,4 +136,4 @@ if __name__ == '__main__':
     # parser.add_argument('--val_dir', metavar='directory', type=is_valid_folder)
 
     FLAGS, unparsed = parser.parse_known_args()
-    tf.app.run(main=main, argv=[sys.argv[0]] + unparsed)
+    tf.compat.v1.app.run(main=main, argv=[sys.argv[0]] + unparsed)
