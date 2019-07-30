@@ -63,6 +63,21 @@ def describe_data(df,file_name='description'):
     description = df.describe()
     description.to_csv('{}.csv'.format(file_name), header=True)
 
+def visualize_all_bar(df,headers,colors,file_name='all_dist_hist',ylim=None):
+    x = np.arange(1,231)
+    #fig, axis = plt.subplots()
+    plt.figure(figsize=(20,5))
+    plt.style.use('seaborn-darkgrid')
+    if not ylim is None:
+        plt.ylim(ylim)
+    for header,color in zip(headers,colors):
+        plt.bar(x,df[header],color=color,label=header,log=True)
+    plt.legend()
+    plt.title=("Distribution of Space Groups in Datasets")
+    plt.xlabel('Space Group')
+    plt.ylabel('Count')
+    plt.savefig('{}.png'.format(file_name))
+
 def visualize_all(df,headers,colors,file_name='all_distribution',ylim=None):
     #bins=np.linspace(0,230,1200)
     x = np.arange(1,231)
@@ -79,6 +94,7 @@ def visualize_all(df,headers,colors,file_name='all_distribution',ylim=None):
     plt.title=("Distribution of Space Groups in Datasets")
     plt.xlabel('Space Group')
     plt.ylabel('Count')
+    
     '''
     n
     sns.distplot(df[headers[0]], color=colors[0])
@@ -93,10 +109,10 @@ def visualize_all(df,headers,colors,file_name='all_distribution',ylim=None):
     plt.savefig('{}.png'.format(file_name))
 
 if __name__ == '__main__':
-     files = ['overall_distribution.json', 'distribution.json', 'distributionDev.json', 'distributionTest.json']
+     files = ['distribution.json', 'distributionDev.json', 'distributionTest.json']
      arrs = [convert_JSON_to_arr(file) for file in files]
-     headers = ['Overall', 'Train', 'Dev', 'Test']
-     colors = ['lightcoral','crimson','mediumslateblue','purple']
+     headers = ['Train', 'Dev', 'Test']
+     colors = ['cornflowerblue','crimson','orchid']
      df = create_df(headers,arrs)
-     visualize_all(df, headers,colors,file_name='all_distribution_zoomed',ylim=[0,2000])
+     visualize_all_bar(df,headers,colors,file_name='distributions_bar_log')
     
