@@ -4,7 +4,7 @@ Created on: 7.27.2019
 Author: Emily Costa
 '''
 import seaborn as sns
-import matplotlib.pyplot as pl
+import matplotlib.pyplot as plt
 import pandas as pd
 from pandas import DataFrame
 import json
@@ -63,15 +63,40 @@ def describe_data(df,file_name='description'):
     description = df.describe()
     description.to_csv('{}.csv'.format(file_name), header=True)
 
-def visualize_all(df,headers,colors,file_name='all_distributions'):
-    sns.distplot([df[header] for header in headers], color=colors)
+def visualize_all(df,headers,colors,file_name='all_distribution',ylim=None):
+    #bins=np.linspace(0,230,1200)
+    x = np.arange(1,231)
+    #fig, axis = plt.subplots()
+    plt.figure(figsize=(18,5))
+    plt.style.use('seaborn-darkgrid')
+    if not ylim is None:
+        plt.ylim(ylim)
+    for header,color in zip(headers,colors):
+        plt.plot(x,df[header],color=color,alpha=0.5,label=header)
+        #plt.hist(df[header],bins,histtype='stepfilled', color=color,alpha=0.3,label=header)
+        #sns.distplot(df[header], ax=axis)
+    plt.legend()
+    plt.title=("Distribution of Space Groups in Datasets")
+    plt.xlabel('Space Group')
+    plt.ylabel('Count')
+    '''
+    n
+    sns.distplot(df[headers[0]], color=colors[0])
+    sns.distplot(df[headers[1]], color=colors[1])
+    sns.distplot(df[headers[2]], color=colors[2])
+    sns.distplot(df[headers[3]], color=colors[3])
+    
+    g = sns.FacetGrid(df, hue=df.index.values)
+    g.map(sns.distplot, [df[header] for headers in header]).add_legend()
+    g.set(xlabel='Space Groups',ylabel='Count',title='Distribution of Space Groups in All Datasets')
+    '''
     plt.savefig('{}.png'.format(file_name))
 
 if __name__ == '__main__':
      files = ['overall_distribution.json', 'distribution.json', 'distributionDev.json', 'distributionTest.json']
      arrs = [convert_JSON_to_arr(file) for file in files]
      headers = ['Overall', 'Train', 'Dev', 'Test']
-     colors = ['blue','m','mediumvioletred','chartreuse']
+     colors = ['lightcoral','crimson','mediumslateblue','purple']
      df = create_df(headers,arrs)
-     visualize_all(df, headers,colors)
+     visualize_all(df, headers,colors,file_name='all_distribution_zoomed',ylim=[0,2000])
     
