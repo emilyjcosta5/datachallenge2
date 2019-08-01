@@ -95,13 +95,14 @@ def convert_to(from_dir, to_dir, dataset_name, start):
                 print("\tProcessing {}...".format(key))
                 image = images[key]
                 label = labels[key]
+                label = int(label)
                 example = tf.train.Example(
                     features=tf.train.Features(
                         feature={
                             'image_1': _bytes_feature(image['image_1']),
                             'image_2': _bytes_feature(image['image_2']),
                             'image_3': _bytes_feature(image['image_3']),
-                            'label': _bytes_feature(label['space_group'])
+                            'label': _int64_feature(label['space_group'])
                         }
                     )
                 )
@@ -110,9 +111,9 @@ def convert_to(from_dir, to_dir, dataset_name, start):
 
 def main(unused_argv):
     i = 0
-    while True:
+    while i < 2: # Just one tfrecord file (2 HDF-5 files) for testing
         try:
-            convert_to(from_dir=FLAGS.train_dir, to_dir='/ccs/home/shutoaraki/challenge_all_data/train', dataset_name='train-{:05d}-of-01024'.format(i), start=i)
+            convert_to(from_dir=FLAGS.train_dir, to_dir='/mnt/bb/shutoaraki/', dataset_name='train-{:05d}-of-01024'.format(i), start=i)
             i += 2 
         except:
             print("Done processing {} files!".format(i))

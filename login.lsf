@@ -1,0 +1,21 @@
+#!/bin/bash
+# Begin LSF directives
+#BSUB -P gen011
+#BSUB -J data_challenge_modeling
+#BSUB -W 01:00
+#BSUB -nnodes 2 
+#BSUB -alloc_flags nvme
+# End LSF directives and begin shell commands
+
+export PATH=/gpfs/alpine/gen011/world-shared/native-build/anaconda3/bin:$PATH
+export TRAIN_DIR=/gpfs/alpine/world-shared/stf011/junqi/smc/train
+export VAL_DIR=/gpfs/alpine/world-shared/stf011/junqi/smc/test
+export LOG_DIR=/gpfs/alpine/scratch/shutoaraki/gen011/
+
+export NCCL_DEBUG='info'
+
+source activate WML161
+
+export nnodes=$(cat ${LSB_DJOB_HOSTFILE} | sort | uniq | grep -v login | grep -v batch | wc -l)
+
+jsrun -n${nnodes} -a1 -c42 -g6 -r1 --bind none "./compute.sh"
