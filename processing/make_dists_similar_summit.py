@@ -4,8 +4,6 @@
 # 08/02/2019
 
 import os
-from pandas import DataFrame
-import json
 import numpy as np
 import h5py
 import random
