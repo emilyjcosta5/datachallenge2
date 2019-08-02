@@ -1,0 +1,29 @@
+Warning: OMP_NUM_THREADS=16 is greater than available PU's
+Warning: OMP_NUM_THREADS=16 is greater than available PU's
+Warning: OMP_NUM_THREADS=16 is greater than available PU's
+Warning: OMP_NUM_THREADS=16 is greater than available PU's
+Traceback (most recent call last):
+  File "distributed_pytorch.py", line 3, in <module>
+Traceback (most recent call last):
+  File "distributed_pytorch.py", line 3, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'
+    import torch
+ModuleNotFoundError: No module named 'torch'
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@batch1>
+Subject: Job 536473: <data_challenge_modeling> in cluster <summit> Done
+
+Job <data_challenge_modeling> was submitted from host <login4> by user <shutoaraki> in cluster <summit> at Thu Aug  1 15:39:13 2019
+Job was executed on host(s) <1*batch1>, in queue <batch>, as user <shutoaraki> in cluster <summit> at Thu Aug  1 15:39:29 2019
+                            <42*a20n07>
+                            <42*a20n08>
+</ccs/home/shutoaraki> was used as the home directory.
+</ccs/home/shutoaraki/datachallenge2/pytorch> was used as the working directory.
+Started at Thu Aug  1 15:39:29 2019
+Terminated at Thu Aug  1 15:44:10 2019
+Results reported at Thu Aug  1 15:44:10 2019
+
+The output (if any) is above this job summary.
+

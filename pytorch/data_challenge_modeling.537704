@@ -1,0 +1,26 @@
+Warning: OMP_NUM_THREADS=16 is greater than available PU's
+Warning: OMP_NUM_THREADS=16 is greater than available PU's
+Traceback (most recent call last):
+  File "pytorch_experiment.py", line 389, in <module>
+    main_experiment()
+  File "pytorch_experiment.py", line 92, in main_experiment
+    hostname = os.environ["HOSTNAME"] 
+  File "/gpfs/alpine/gen011/world-shared/native-build/anaconda3/envs/WML161/lib/python3.6/os.py", line 669, in __getitem__
+    raise KeyError(key) from None
+KeyError: 'HOSTNAME'
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@batch3>
+Subject: Job 537704: <data_challenge_modeling> in cluster <summit> Done
+
+Job <data_challenge_modeling> was submitted from host <login1> by user <shutoaraki> in cluster <summit> at Fri Aug  2 11:24:15 2019
+Job was executed on host(s) <1*batch3>, in queue <batch>, as user <shutoaraki> in cluster <summit> at Fri Aug  2 11:24:23 2019
+                            <42*h36n10>
+</ccs/home/shutoaraki> was used as the home directory.
+</ccs/home/shutoaraki/datachallenge2/pytorch> was used as the working directory.
+Started at Fri Aug  2 11:24:23 2019
+Terminated at Fri Aug  2 11:28:46 2019
+Results reported at Fri Aug  2 11:28:46 2019
+
+The output (if any) is above this job summary.
+

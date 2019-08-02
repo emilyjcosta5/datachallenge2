@@ -8,9 +8,11 @@ import torch.backends.cudnn as cudnn
 import torch.nn.functional as F
 import torch.optim as optim
 import torch.utils.data.distributed
+import torch.distributed as dist
 import horovod.torch as hvd
 import tensorboardX
 import math
+import subprocess
 from tqdm import tqdm
 from torch.utils.data import Dataset, DataLoader
 from torchvision import models
@@ -71,7 +73,7 @@ class HDF5Dataset(Dataset):
         return len(self.data_files)
     
     def _load_hdf5_file(self, index):
-        if index % 1000 == 0 and args.verbose:
+        if index % 1000 == 0 and verbose:
             print("Processing {}th file!".format(index))
         hdf5_file, key = self.data_files[index]
         f = h5py.File(hdf5_file, "r")
@@ -85,6 +87,24 @@ class HDF5Dataset(Dataset):
 def main_experiment():
     torch.manual_seed(args.seed)
     
+    # Distributed training setup
+    import socket
+    hostname = socket.gethostname() 
+    IP = socket.gethostbyname(hostname) 
+    os.environ["MASTER_ADDR"] = IP
+
+    get_cnodes = "echo $(cat {} | sort | uniq | grep -v batch | grep -v login)".format(os.environ['LSB_DJOB_HOSTFILE'])
+    cnodes = subprocess.check_output(get_cnodes, shell=True)
+    cnodes = str(cnodes)[2:-3].split(' ')
+    nnodes = len(cnodes)
+    rank = int(os.environ['PMIX_RANK']) 
+    print("RANK:", rank)
+    dist.init_process_group(backend="nccl",
+                            world_size=nnodes, 
+                            rank=rank)
+    
+    #dist.init_process_group(backend="nccl")
+
     print("======= START LOADING DATA =========")
     #train_n = len(os.listdir(args.train_dir))
     train_n = 30
@@ -113,7 +133,8 @@ def main_experiment():
 
     # Set up standard ResNet-50 model.
     model = models.resnet50()
-    model.cuda()
+    #model.cuda()
+    model = torch.nn.parallel.DistributedDataParallel(model)
 
     # Horovod: scale learning rate by the number of GPUs.
     # Gradient Accumulation: scale learning rate by batches_per_allreduce
