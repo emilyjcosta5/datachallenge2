@@ -72,8 +72,8 @@ if __name__ == '__main__':
     # Final files will be at h5_save_path + "massaged" + fileNames + ".h5"
     fileNames = ["Train", "Dev", "Test"]
     # Rough ratio of sizes of the new .h5 files to be created.
-    # In this case, Train will be about 5 times as large as Dev and Test
-    fileRatios = [5, 1, 1]
+    # In this case, Train will be about 7 times as large as Dev and Test
+    fileRatios = [7, 1, 1]
 
     # Check if we have already made these files before.
     # If so, no need to remake them.
