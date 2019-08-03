@@ -92,7 +92,7 @@ if __name__ == '__main__':
 
     # Iterate through current .h5 files and move distribute the entries
     # into the newly created .h5 files
-    curFilePaths = sorted([os.path.join(h5_path, aFileName) for aFileName in os.listdir(directory) if aFileName.endswith('.h5')])
+    curFilePaths = sorted([os.path.join(h5_path, aFileName) for aFileName in os.listdir(h5_path) if aFileName.endswith('.h5')])
 
     for aFilePath in curFilePaths:
         try:
