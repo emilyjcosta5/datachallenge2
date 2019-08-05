@@ -29,7 +29,8 @@ def _distribute_dataset(anH5File, h5Files, space_group_distribution):
     for key in keys:
         # if there are less than 30 total instances of this space group, 
         # we add them to all of the .h5 files
-        if space_group_distribution[anH5File[key].attrs['space_group'] - 1] < 30:
+        #breakpoint()
+        if space_group_distribution[int(anH5File[key].attrs['space_group']) - 1] < 30:
             for h5File in h5Files:
                 anH5File.copy(key, h5File)
 
@@ -62,7 +63,8 @@ def _setup_h5_datasets(h5_save_path, fileNames, fileRatios):
 
 if __name__ == '__main__':
     # Directory with the current .h5 files
-    h5_path = "/gpfs/alpine/world-shared/stf011/junqi/smc/train/"
+    #h5_path = "/gpfs/alpine/world-shared/stf011/junqi/smc/train/"
+    h5_path = "../train/"
     # Directory we want to save new .h5 files to. Must end in /
     h5_save_path = ""
     # JSON file with the overall distribution in it
