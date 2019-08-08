@@ -9,8 +9,8 @@ import h5py
 import numpy as np
 import os
 import pandas as pd
-import tensorflow as tf
-import hdf5_to_tfrecord
+#import tensorflow as tf
+#import hdf5_to_tfrecord
 #import pyUSID as usid
 #from numba import cuda
 import matplotlib.pyplot as plt
