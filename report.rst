@@ -5,7 +5,17 @@ Addressing Space Group Imbalance in Large Crystallographic Datasets for Training
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 :Contributors: Emily Costa\ :sup:`ab`, Alvin Tan\ :sup:`cd`, Yuya Kawakami\ :sup:`ae`, Shuto Araki\ :sup:`af`
 
-In machine learning, imbalanced datasets can cause bias in the results of the algorithm. In order to achieve excellent performance, the datasets are processed before being run through the machine learning algorithm. Typically, in solving a neural network, more data is better. However, if that dataset is large enough and unnecessary, it is possible to reduce the dataset without greatly compromising the performance of the trained system.
+In machine learning, imbalanced datasets can cause bias in the results of the algorithm. In order to achieve excellent performance, the datasets are processed before being run through the machine learning algorithm. Typically, in solving a neural network, more data is better. However, if that dataset is large enough and unnecessary, it is possible to reduce the dataset without greatly compromising the performance of the trained system. The two issues our group addressed in our research are (**1**) developing a machine learning algorithm for space group classification of CBED data and (**2**) implementing proper machine learning techniques to overcome data imbalance and show how it affects the performance of the machine learning algorithm. 
+
+**Machine Learning for Space Group Classification of CBED data**
+
+Shuto talks about resNET or defectNET or whatever
+
+How did we measure performance?
+
+**Addressing the Data Imbalance**
+
+Though the machine learning algorithm was significant, our main focus of this project was the balance the dataset to optimize the performance and accurancy of the neural network.
 
 .. image:: https://raw.githubusercontent.com/emilyjcosta5/datachallenge2/master/distributions/graphs/distributions_bar_log.png
   :width: 400
@@ -13,13 +23,17 @@ In machine learning, imbalanced datasets can cause bias in the results of the al
 
 Alvin talk about redistributed data and how
 
+Emily adds distribution post Alvin
+
 Yuya talks about SMOTE
 
-Shuto talks about resNET or defectNET or whatever
+Yuya adds example image of GANs generated psuedo-data
 
+Emily adds image of balanced dataset
 
 References
 ~~~~~~~~~~
+https://smc-datachallenge.ornl.gov/challenges-2019/challenge-2-2019/
 
 Affiliations
 ~~~~~~~~~~~~
