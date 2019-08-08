@@ -37,7 +37,10 @@ def _distribute_dataset(anH5File, h5Files, space_group_distribution):
         # Otherwise, we pseudorandomly distribute samples among the new files for a
         # roughly even distribution
         randNum = random.randrange(len(h5Files))
-        anH5File.copy(key, h5Files[randNum])
+        try:
+            anH5File.copy(key, h5Files[randNum])
+        except RuntimeError:
+            print("sadBoi")
 
     return
 
@@ -65,6 +68,7 @@ if __name__ == '__main__':
     # Directory with the current .h5 files
     #h5_path = "/gpfs/alpine/world-shared/stf011/junqi/smc/train/"
     h5_paths = ["/gpfs/alpine/world-shared/stf011/junqi/smc/train", "/gpfs/alpine/world-shared/stf011/junqi/smc/test", "/gpfs/alpine/world-shared/stf011/junqi/smc/dev"]
+    #h5_paths = ["../train", "../train", "../train"]
     # Directory we want to save new .h5 files to. Must end in /
     h5_save_path = ""
     # JSON file with the overall distribution in it
