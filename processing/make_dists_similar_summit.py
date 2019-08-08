@@ -63,8 +63,9 @@ def _setup_h5_datasets(h5_save_path, fileNames, fileRatios):
 
 if __name__ == '__main__':
     # Directory with the current .h5 files
-   h5_path = "/gpfs/alpine/world-shared/stf011/junqi/smc/train/"
-   # Directory we want to save new .h5 files to. Must end in /
+    #h5_path = "/gpfs/alpine/world-shared/stf011/junqi/smc/train/"
+    h5_paths = ["/gpfs/alpine/world-shared/stf011/junqi/smc/train", "/gpfs/alpine/world-shared/stf011/junqi/smc/test", "/gpfs/alpine/world-shared/stf011/junqi/smc/dev"]
+    # Directory we want to save new .h5 files to. Must end in /
     h5_save_path = ""
     # JSON file with the overall distribution in it
     distribution_JSON_path = "../distributions/dataframes/overall_distribution.json"
@@ -91,18 +92,19 @@ if __name__ == '__main__':
     # Create new .h5 files to fill out
     h5Files = _setup_h5_datasets(h5_save_path, fileNames, fileRatios)
 
-    # Iterate through current .h5 files and move distribute the entries
-    # into the newly created .h5 files
-    curFilePaths = sorted([os.path.join(h5_path, aFileName) for aFileName in os.listdir(h5_path) if aFileName.endswith('.h5')])
+    for h5_path in h5_paths:
+        # Iterate through current .h5 files and move distribute the entries
+        # into the newly created .h5 files
+        curFilePaths = sorted([os.path.join(h5_path, aFileName) for aFileName in os.listdir(h5_path) if aFileName.endswith('.h5')])
 
-    for aFilePath in curFilePaths:
-        try:
-            anH5File = h5py.File(aFilePath, 'r')
-            _distribute_dataset(anH5File, h5Files, space_group_distribution)
-            print("Distributed {} across new datasets".format(aFilePath))
-            anH5File.close()
-        except OSError:
-            print("Could not read {}. Skipping".format(aFilePath))
+        for aFilePath in curFilePaths:
+            try:
+                anH5File = h5py.File(aFilePath, 'r')
+                _distribute_dataset(anH5File, h5Files, space_group_distribution)
+                print("Distributed {} across new datasets".format(aFilePath))
+                anH5File.close()
+            except OSError:
+                print("Could not read {}. Skipping".format(aFilePath))
 
     # Closes the newly created .h5 files
     for h5File in h5Files:
