@@ -25,13 +25,13 @@ Affiliations
 
 \ :sup:`c` Department of Electrical and Computer Engineering, Northwestern University, Evanston, IL 60208, USA
 
-\ :sup:`d`
+\ :sup:`d` Center for Nanophase Materials Sciences, Oak Ridge National Laboratory, Oak Ridge, TN 37831, USA
 
-\ :sup:`e`
+\ :sup:`e` @Yuya ORNL info
 
-\ :sup:`f`
+\ :sup:`f` @Yuya uni info
 
-\ :sup:`g`
+\ :sup:`g` @Shuto uni info
 
 Acknowledgements
 ~~~~~~~~~~~~~~~~
