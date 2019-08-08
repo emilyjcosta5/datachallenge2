@@ -87,7 +87,8 @@ class HDF5Dataset(Dataset):
 def main_experiment():
     torch.manual_seed(args.seed)
     
-    # Distributed training setup
+    # Distributed training setup (Doesn't work yet lol)
+    '''
     import socket
     hostname = socket.gethostname() 
     IP = socket.gethostbyname(hostname) 
@@ -104,17 +105,16 @@ def main_experiment():
                             rank=rank)
     
     #dist.init_process_group(backend="nccl")
+    '''
 
     print("======= START LOADING DATA =========")
     #train_n = len(os.listdir(args.train_dir))
-    train_n = 30
+    num_files = len(os.listdir(args.train_dir))
+    train_n = np.floor(num_files * 0.8)
     train_files = sorted(os.listdir(args.train_dir))[:train_n]
-    #train_files = ["batch_train_{}.h5".format(i) for i in range(train_n)]
-    #train_files = ["batch_train_0.h5", "batch_train_1.h5"] 
     train_dataset = HDF5Dataset(args.train_dir, train_files)
-     
-    val_n = 10
-    val_files = sorted(os.listdir(args.val_dir))[:val_n]
+    
+    val_files = sorted(os.listdir(args.train_dir))[train_n:]
     val_dataset = HDF5Dataset(args.val_dir, val_files)
     print("Training size")
     print(len(train_dataset))
@@ -133,8 +133,8 @@ def main_experiment():
 
     # Set up standard ResNet-50 model.
     model = models.resnet50()
-    #model.cuda()
-    model = torch.nn.parallel.DistributedDataParallel(model)
+    model.cuda()
+#     model = torch.nn.parallel.DistributedDataParallel(model)
 
     # Horovod: scale learning rate by the number of GPUs.
     # Gradient Accumulation: scale learning rate by batches_per_allreduce
