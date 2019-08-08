@@ -3,7 +3,7 @@ Towards a Universal Classifier for Crystallographic Space Groups
 ================================================================
 Addressing Space Group Imbalance in Large Crystallographic Datasets for Training a Neural Network.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-:Contributors: Emily Costa\ :sup:`ab`, Alvin Tan\ :sup:`cd`, Yuya Kawakami\ :sup:`ef`, Shuto Araki\ :sup:`ag`
+:Contributors: Emily Costa\ :sup:`ab`, Alvin Tan\ :sup:`cd`, Yuya Kawakami\ :sup:`af`, Shuto Araki\ :sup:`af`
 
 Emily talks about finding and visualizing distribution then conclusions
 
@@ -27,11 +27,9 @@ Affiliations
 
 \ :sup:`d` Center for Nanophase Materials Sciences, Oak Ridge National Laboratory, Oak Ridge, TN 37831, USA
 
-\ :sup:`e` @Yuya ORNL info
+\ :sup:`e` Department of Mathematics, Computer Science, Grinnell College, Grinnell, IA 50112, USA
 
-\ :sup:`f` @Yuya uni info
-
-\ :sup:`g` @Shuto uni info
+\ :sup:`f` @Shuto uni info
 
 Acknowledgements
 ~~~~~~~~~~~~~~~~
