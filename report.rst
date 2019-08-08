@@ -3,7 +3,7 @@ Towards a Universal Classifier for Crystallographic Space Groups
 ================================================================
 Addressing Space Group Imbalance in Large Crystallographic Datasets for Training a Neural Network.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-:Contributors: Emily Costa\ :sup:`ab`, Alvin Tan\ :sup:`cd`, Yuya Kawakami\ :sup:`af`, Shuto Araki\ :sup:`af`
+:Contributors: Emily Costa\ :sup:`ab`, Alvin Tan\ :sup:`cd`, Yuya Kawakami\ :sup:`ae`, Shuto Araki\ :sup:`af`
 
 Emily talks about finding and visualizing distribution then conclusions
 
