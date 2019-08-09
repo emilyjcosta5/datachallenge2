@@ -41,22 +41,17 @@ To further address the data imbalance, a combination of two techniques was used.
 
 (**2**) **Over-sampling**, synthetic data was generated to compensate for under-represented space groups. 
 
-A balance of under-sampling and 
-In the case of the crystallograhy multi-classes (230 classes!), a strategy would be to find a medium between strategy 1 and 2. One might slowly reduce the excess datapoints of over-represented class until performance drops below some threshold for the 20 (or so) largest classes. After that, over-sampling can be done to bring under-represented classes to the same level of representation.
+As mentioned, an imbalanced dataset can be detrimental to the performance of a machine learning algorithm. Over-sampling of minority classes with the creation of synthetic minority class data is one method to deal with an imbalanced dataset. To this end, we propose using SMOTE (Synthetic Minority Over-Sampling Technique) \ :sup:`1`. With SMOTE, synthetic samples are generated using by taking the k nearest neighobors of a sample, and generating a random point along the line segment  between the sample in question and and the nearest neigbhors. Details of SMOTE is outlined in the referenced paper. We used the SMOTE implementation in Python's :code:`imbalanced-learn` package. 
 
-  
- .. raw:: html
-   <img src="https://raw.githubusercontent.com/emilyjcosta5/datachallenge2/master/train/original.png" align="center">
-     
- .. raw:: html
-   <img src="https://raw.githubusercontent.com/emilyjcosta5/datachallenge2/master/train/generated.png" align="center">
+.. image:: https://raw.githubusercontent.com/emilyjcosta5/datachallenge2/master/train/original.png
 
+.. image:: https://raw.githubusercontent.com/emilyjcosta5/datachallenge2/master/train/generated.png
 
+The above images are examples of a SMOTE generated data and the original data from which SMOTE was generated. In the above example, 10 samples of images in Space Group 2 were given to SMOTE to generate 5 synthetic sample. 2 of the original data and 4 of the generated data is shown as an example. 
 
 
 Yuya talks about SMOTE
 
-Yuya adds example image of GANs generated psuedo-data
 
 Emily adds image of balanced dataset
 
@@ -66,6 +61,8 @@ Future Work
 References
 ~~~~~~~~~~
 https://smc-datachallenge.ornl.gov/challenges-2019/challenge-2-2019/
+
+[1] Chawla, N. V., K. W. Bowyer, L. O. Hall, and W. P. Kegelmeyer. "SMOTE: Synthetic Minority Over-sampling Technique." Journal of Artificial Intelligence Research 16 (2002): 321-57. doi:10.1613/jair.953.
 
 Affiliations
 ~~~~~~~~~~~~
