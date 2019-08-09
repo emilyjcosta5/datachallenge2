@@ -43,6 +43,17 @@ def _distribute_dataset(anH5File, h5Files, space_group_distribution):
             except RuntimeError:
                 print("sadBoi")
 
+        # if the file is getting too large, we want to close it off and start a new file
+        if len(list(h5Files[randNum].keys())) > 500:
+            oldName = h5Files[randNum].name
+            newName = r"{}{}.h5".format(oldName[:13], time.time())
+            h5Files[randNum].close()
+            newH5File = h5py.File(newName)
+            for i in range(len(h5Files)):
+                if h5Files[i].closed:
+                    h5Files[i] = newH5File
+            
+
     return
 
 
@@ -78,7 +89,7 @@ if __name__ == '__main__':
 
     # These are the .h5 files we want to create.
     # Final files will be at h5_save_path + "massaged" + fileNames + time + ".h5"
-    fileNames = ["Train", "Dev", "Test"]
+    fileNames = ["Train", "Devel", "Tests"]
     # Rough ratio of sizes of the new .h5 files to be created.
     # In this case, Train will be about 7 times as large as Dev and Test
     fileRatios = [7, 1, 1]
