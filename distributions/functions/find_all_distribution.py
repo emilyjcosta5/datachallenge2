@@ -109,7 +109,7 @@ def visualize_all(df,headers,colors,file_name='all_distribution',ylim=None):
     plt.savefig('{}.png'.format(file_name))
 
 if __name__ == '__main__':
-     files = ['distribution.json', 'distributionDev.json', 'distributionTest.json']
+     files = ['train_redist.json', 'dev_redist.json', 'test_redist.json']
      arrs = [convert_JSON_to_arr(file) for file in files]
      headers = ['Train', 'Dev', 'Test']
      colors = ['cornflowerblue','crimson','orchid']
