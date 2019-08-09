@@ -70,15 +70,11 @@ def visualize_all_bar(df,headers,colors,file_name='all_dist_hist',ylim=None):
     plt.style.use('seaborn-darkgrid')
     if not ylim is None:
         plt.ylim(ylim)
-    prevTop = np.zeros(230)
-    inspectPix = 49
-    print("printout for pixel {}".format(inspectPix))
-    for header,color in zip(headers,colors):
-        plt.bar(x,df[header],bottom=prevTop,color=color,label=header,log=True)
-        #breakpoint()
-        print("{} bottom: {}, value: {}".format(header, prevTop[inspectPix], df[header][inspectPix]))
-        prevTop += df[header]
-    plt.legend()
+    for header,color,arr in zip(headers,colors,arrs):
+        print(arr)
+        #print(df[header])
+        plt.bar(x, arr, color=color,label=header,log=True)
+   plt.legend()
     plt.title=("Distribution of Space Groups in Datasets")
     plt.xlabel('Space Group')
     plt.ylabel('Count')
@@ -97,7 +93,7 @@ def visualize_all(df,headers,colors,file_name='all_distribution',ylim=None):
         #plt.hist(df[header],bins,histtype='stepfilled', color=color,alpha=0.3,label=header)
         #sns.distplot(df[header], ax=axis)
     plt.legend()
-    plt.title=("Distribution of Space Groups in Datasets")
+    plt.title=("Distribution of Space roups in Datasets")
     plt.xlabel('Space Group')
     plt.ylabel('Count')
     
@@ -115,11 +111,13 @@ def visualize_all(df,headers,colors,file_name='all_distribution',ylim=None):
     plt.savefig('{}.png'.format(file_name))
 
 if __name__ == '__main__':
-    #files = ['../dataframes/estDistTrain.json', '../dataframes/estDistDev.json', '../dataframes/estDistTest.json']
-    files = ['train_redist.json', 'dev_redist.json', 'test_redist.json']
+<<<<<<< HEAD
+    files = ['train_redist.json', 'test_redist.json', 'all_redist.json']
     arrs = [convert_JSON_to_arr(file) for file in files]
-    headers = ['Train', 'Dev', 'Test']
-    colors = ['cornflowerblue','crimson','orchid']
+    #print(arrs.shape)
+    headers = ['Train redistributed', 'Dev and test redistributed', 'Train, dev, and test redistributed']
+    colors = ['cornflowerblue','m','b']
     df = create_df(headers,arrs)
-    visualize_all_bar(df,headers,colors,file_name='distributions_bar_log')
-    
+    save_pd_to_csv(df)
+    visualize_all_bar(arrs,headers,colors,file_name='redistributions_bar_log')
+   
