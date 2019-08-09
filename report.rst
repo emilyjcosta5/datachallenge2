@@ -46,8 +46,13 @@ In the case of the crystallograhy multi-classes (230 classes!), a strategy would
 
 
 .. image:: https://raw.githubusercontent.com/emilyjcosta5/datachallenge2/master/train/original.png
-  :scale: 10 %
-  :alt: Figure 1. Original Distribution
+  :align: center
+  :alt: Figure 2. Subset of original data from Space Group 2
+  
+.. image:: https://raw.githubusercontent.com/emilyjcosta5/datachallenge2/master/train/generated.png
+  :align: center
+  :alt: Figure 2. Generated data using SMOTE of Space Group 2
+
 
 
 Yuya talks about SMOTE
