@@ -20,7 +20,7 @@ Addressing the Data Imbalance
 The main focus of this project was to balance the dataset to optimize the performance and accurancy of the neural network. The overall representation of datasets exhibited a significant data imbalance. The average space group representation of the overall dataset was 814 images per space group, while the 25th percentile average was only 23 images per space group. The distribution of the original data can be seen in Figure 1.
 
 .. image:: https://raw.githubusercontent.com/emilyjcosta5/datachallenge2/master/distributions/graphs/distributions_bar_log.png
-  :width: 400
+  :width: 2000
   :alt: Figure 1. Original Distribution
   
 Figure 1. Original Distribution
@@ -32,7 +32,7 @@ One of the issues we faced was a difference in the composition of the training d
 The code to redistribute the data across our three datasets can be found in processing/make_dists_similar_summit.py. The gist is that after creating the three HDF5 files to hold our new datasets, we iterate through all of the data we have available and pseudorandomly distribute them between our three datasets. This theoretically results in similar representations of the space groups across all three datasets. We can also encourage one dataset to be larger than the other by adjusting the structure of the random selection. In our case, we wanted the training set to be about seven times as large as the development and testing sets, which was achieved by simply making it seven times as likely to send data to the training set than to the development set or to the testing set. This 7-1-1 ratio was selected by inspecting the current training, development, and testing datasets and using a ratio similar to the relative sizes of those. Of course, this method may result in poor distribution of sparse space groups, so for all space groups that had less than 30 samples total, we copied every sample into each of our datasets until each space group had at least 30 samples. Thus, the scantest pseudorandom redistribution would be that of a space group with 30 samples. Our resulting datasets' space group distributions can be seen in Figure 2. Now, our overall average amount of samples per space group is 839, while the 25th percentile average increased to 90 images per space group.
 
 .. image:: https://raw.githubusercontent.com/emilyjcosta5/datachallenge2/master/distributions/functions/redistributions_bar_log.png
-  :width: 400
+  :width: 2000
   :alt: Figure 2. Redistributed Distribution
   
 Figure 2. Redistributed Distribution
@@ -48,8 +48,10 @@ To further address the data imbalance, a combination of two techniques was used.
 As mentioned, an imbalanced dataset can be detrimental to the performance of a machine learning algorithm. Over-sampling of minority classes with the creation of synthetic minority class data is one method to deal with an imbalanced dataset. To this end, we propose using SMOTE (Synthetic Minority Over-Sampling Technique) \ :sup:`1`. With SMOTE, synthetic samples are generated using by taking the k nearest neighobors of a sample, and generating a random point along the line segment  between the sample in question and and the nearest neigbhors. Details of SMOTE is outlined in the referenced paper. We used the SMOTE implementation in Python's :code:`imbalanced-learn` package. 
 
 .. image:: https://raw.githubusercontent.com/emilyjcosta5/datachallenge2/master/train/original.png
+   :width: 1200
 
 .. image:: https://raw.githubusercontent.com/emilyjcosta5/datachallenge2/master/train/generated.png
+   :width: 1500
 
 The above images are examples of a SMOTE generated data and the original data from which SMOTE was generated. In the above example, 10 samples of images in Space Group 2 were given to SMOTE to generate 5 synthetic sample. 2 of the original data and 4 of the generated data is shown as an example. 
 
