@@ -39,9 +39,9 @@ images_res, classes_res = sm.fit_resample(images, classes)
 
 # List to hold the final images
 images_final=[]
-image_rest_list=images_res.tolist()
-for image_rest_list in image_rest_list:
-    images_final.append(np.reshape(image_rest_list, (3, 512, 512)))
+image_res_list=images_res.tolist()
+for image_res_list in image_res_list:
+    images_final.append(np.reshape(image_res_list, (3, 512, 512)))
 
 # print("length of images: {}".format(len(images)))
 # print("length of images_final: {}".format(len(images_final)))
