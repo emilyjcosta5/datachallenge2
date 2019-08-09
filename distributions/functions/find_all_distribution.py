@@ -74,7 +74,7 @@ def visualize_all_bar(df,headers,colors,file_name='all_dist_hist',ylim=None):
         print(arr)
         #print(df[header])
         plt.bar(x, arr, color=color,label=header,log=True)
-   plt.legend()
+    plt.legend()
     plt.title=("Distribution of Space Groups in Datasets")
     plt.xlabel('Space Group')
     plt.ylabel('Count')
