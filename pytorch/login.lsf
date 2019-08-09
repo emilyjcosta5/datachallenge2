@@ -17,9 +17,11 @@ source activate WML161
 export nnodes=$(cat ${LSB_DJOB_HOSTFILE} | sort | uniq | grep -v login | grep -v batch | wc -l)
 
 # Copy data to SSD
+echo "Loading data..."
 jsrun -n${nnodes} -a1 -c42 -r1 cp -r /gpfs/alpine/world-shared/stf011/junqi/smc/ /mnt/bb/$USER
 export DATADIR=/mnt/bb/$USER/smc
 export TRAIN_DIR=$DATADIR/train
 export VAL_DIR=$DATADIR/test
+echo "Done loading data!"
 
 jsrun -n${nnodes} -a1 -c42 -g6 -r1 --bind none "./compute.sh"
