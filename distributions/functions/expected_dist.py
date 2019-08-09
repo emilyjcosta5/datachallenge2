@@ -18,14 +18,17 @@ def predict_dist(overall):
     train_redist = {}
     test_redist = {}
     dev_redist = {}
+    all_redist = {}
     for x in range:
         sg = overall['Space Group {}'.format(x)]
         if sg < 90:
-            train_redist['Space Group {}'.format(x)] = 30
-            test_redist['Space Group {}'.format(x)] = 30
-            dev_redist['Space Group {}'.format(x)] = 30
+            all_redist['Space Group {}'.format(x)] = 30
+            train_redist['Space Group {}'.format(x)] = 0
+            test_redist['Space Group {}'.format(x)] = 0
+            dev_redist['Space Group {}'.format(x)] = 0
         else:
             y = int(sg/9)
+            all_redist['Space Group {}'.format(x)] = 0
             train_redist['Space Group {}'.format(x)] = y*7
             test_redist['Space Group {}'.format(x)] = y
             dev_redist['Space Group {}'.format(x)] = y
@@ -38,7 +41,9 @@ def predict_dist(overall):
         
     with open('dev_redist.json', 'w') as de:
         json.dump(dev_redist, de)
-
+    
+    with open('all_redist.json', 'w') as a:
+        json.dump(all_redist, a)
         
 if __name__ == '__main__':
     json_path = 'overall_distribution.json'

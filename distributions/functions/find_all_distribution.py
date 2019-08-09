@@ -93,7 +93,7 @@ def visualize_all(df,headers,colors,file_name='all_distribution',ylim=None):
         #plt.hist(df[header],bins,histtype='stepfilled', color=color,alpha=0.3,label=header)
         #sns.distplot(df[header], ax=axis)
     plt.legend()
-    plt.title=("Distribution of Space Groups in Datasets")
+    plt.title=("Distribution of Space roups in Datasets")
     plt.xlabel('Space Group')
     plt.ylabel('Count')
     
@@ -111,11 +111,11 @@ def visualize_all(df,headers,colors,file_name='all_distribution',ylim=None):
     plt.savefig('{}.png'.format(file_name))
 
 if __name__ == '__main__':
-    files = ['train_redist.json', 'dev_redist.json', 'test_redist.json']
+    files = ['train_redist.json', 'test_redist.json', 'all_redist.json']
     arrs = [convert_JSON_to_arr(file) for file in files]
     #print(arrs.shape)
-    headers = ['Train Redistributed', 'Dev Redistributed', 'Test Redistributed']
-    colors = ['cornflowerblue','crimson','orchid']
+    headers = ['Train redistributed', 'Dev and test redistributed', 'Train, dev, and test redistributed']
+    colors = ['cornflowerblue','m','b']
     df = create_df(headers,arrs)
     save_pd_to_csv(df)
     visualize_all_bar(arrs,headers,colors,file_name='redistributions_bar_log')
