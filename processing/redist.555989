@@ -1,0 +1,42 @@
+Collecting json
+  Could not find a version that satisfies the requirement json (from versions: )
+No matching distribution found for json
+Requirement already satisfied: h5py in /autofs/nccs-svm1_sw/summit/python/3.6/anaconda3/5.3.0/lib/python3.6/site-packages (2.8.0)
+Requirement already satisfied: numpy>=1.7 in /autofs/nccs-svm1_sw/summit/python/3.6/anaconda3/5.3.0/lib/python3.6/site-packages (from h5py) (1.14.5)
+Requirement already satisfied: six in /autofs/nccs-svm1_sw/summit/python/3.6/anaconda3/5.3.0/lib/python3.6/site-packages (from h5py) (1.11.0)
+Requirement already satisfied: pandas in /autofs/nccs-svm1_sw/summit/python/3.6/anaconda3/5.3.0/lib/python3.6/site-packages (0.23.4)
+Requirement already satisfied: python-dateutil>=2.5.0 in /autofs/nccs-svm1_sw/summit/python/3.6/anaconda3/5.3.0/lib/python3.6/site-packages (from pandas) (2.7.5)
+Requirement already satisfied: pytz>=2011k in /autofs/nccs-svm1_sw/summit/python/3.6/anaconda3/5.3.0/lib/python3.6/site-packages (from pandas) (2018.7)
+Requirement already satisfied: numpy>=1.9.0 in /autofs/nccs-svm1_sw/summit/python/3.6/anaconda3/5.3.0/lib/python3.6/site-packages (from pandas) (1.14.5)
+Requirement already satisfied: six>=1.5 in /autofs/nccs-svm1_sw/summit/python/3.6/anaconda3/5.3.0/lib/python3.6/site-packages (from python-dateutil>=2.5.0->pandas) (1.11.0)
+Created new .h5 file at massagedTrain1565359651.8108654.h5
+Created new .h5 file at massagedDev1565359651.8108654.h5
+Created new .h5 file at massagedTest1565359651.8108654.h5
+Distributed /gpfs/alpine/world-shared/stf011/junqi/smc/train/batch_train_0.h5 across new datasets
+Traceback (most recent call last):
+  File "make_dists_similar_summit.py", line 111, in <module>
+    _distribute_dataset(anH5File, h5Files, space_group_distribution)
+  File "make_dists_similar_summit.py", line 42, in _distribute_dataset
+    anH5File.copy(key, h5Files[randNum])
+  File "/sw/summit/python/3.6/anaconda3/5.3.0/lib/python3.6/site-packages/h5py/_hl/group.py", line 409, in copy
+    copypl, base.dlcpl)
+  File "h5py/_objects.pyx", line 54, in h5py._objects.with_phil.wrapper
+  File "h5py/_objects.pyx", line 55, in h5py._objects.with_phil.wrapper
+  File "h5py/h5o.pyx", line 217, in h5py.h5o.copy
+ValueError: Destination object already exists (destination object already exists)
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@batch3>
+Subject: Job 555989: <redist> in cluster <summit> Exited
+
+Job <redist> was submitted from host <login4> by user <ecost020> in cluster <summit> at Fri Aug  9 10:07:12 2019
+Job was executed on host(s) <1*batch3>, in queue <batch>, as user <ecost020> in cluster <summit> at Fri Aug  9 10:07:20 2019
+                            <42*h36n10>
+</ccs/home/ecost020> was used as the home directory.
+</gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing> was used as the working directory.
+Started at Fri Aug  9 10:07:20 2019
+Terminated at Fri Aug  9 10:07:39 2019
+Results reported at Fri Aug  9 10:07:39 2019
+
+The output (if any) is above this job summary.
+
