@@ -74,7 +74,7 @@ def visualize_all_bar(df,headers,colors,file_name='all_dist_hist',ylim=None):
         print(arr)
         #print(df[header])
         plt.bar(x, arr, color=color,label=header,log=True)
-   plt.legend()
+    plt.legend()
     plt.title=("Distribution of Space Groups in Datasets")
     plt.xlabel('Space Group')
     plt.ylabel('Count')
@@ -111,13 +111,16 @@ def visualize_all(df,headers,colors,file_name='all_distribution',ylim=None):
     plt.savefig('{}.png'.format(file_name))
 
 if __name__ == '__main__':
-<<<<<<< HEAD
+    #files = ['train_redist.json', 'dev_redist.json', 'test_redist.json']
+    #headers = ['Train redistributed', 'Dev redistributed', 'Test redistributed']
+    #arrs = [convert_JSON_to_arr(file) for file in files]
+    #df = create_df(headers,arrs)
+    #df.describe().to_csv('redist_stat.csv',header=True)
+    #save_pd_to_csv(df)
+    #for visualizing
+    colors = ['cornflowerblue','m','b']
     files = ['train_redist.json', 'test_redist.json', 'all_redist.json']
     arrs = [convert_JSON_to_arr(file) for file in files]
-    #print(arrs.shape)
     headers = ['Train redistributed', 'Dev and test redistributed', 'Train, dev, and test redistributed']
-    colors = ['cornflowerblue','m','b']
-    df = create_df(headers,arrs)
-    save_pd_to_csv(df)
     visualize_all_bar(arrs,headers,colors,file_name='redistributions_bar_log')
    
