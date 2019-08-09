@@ -49,10 +49,6 @@ As mentioned, an imbalanced dataset can be detrimental to the performance of a m
 
 The above images are examples of a SMOTE generated data and the original data from which SMOTE was generated. In the above example, 10 samples of images in Space Group 2 were given to SMOTE to generate 5 synthetic sample. 2 of the original data and 4 of the generated data is shown as an example. 
 
-
-Yuya talks about SMOTE
-
-
 Emily adds image of balanced dataset
 
 Future Work 
