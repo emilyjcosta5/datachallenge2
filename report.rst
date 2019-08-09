@@ -62,8 +62,7 @@ The above images are examples of a SMOTE generated data and the original data fr
 
 Future Work 
 ~~~~~~~~~~~
-Yuya, talk about how we would mess around with how much we would over-sample using smote or under-sample.
-
+The SMOTE implementation in the :code:`imbalanced-learn` package allows users to specify the number of synthetic data to generate via a python dictionary. Since this dictates the degree to which we oversample, this is a critical hyperparameter to tune. Furthermore, the number of neighbors that SMOTE uses to generate synthetic data can be specified as an argument (We have used 6 in our example). Further work will include tuning these parameters. 
 Shuto, talk about exploring over nets.
 
 
