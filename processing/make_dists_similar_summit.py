@@ -28,33 +28,46 @@ def _distribute_dataset(anH5File, h5Files, space_group_distribution):
     # Pseudorandomly distribute samples among the new files for a
     # roughly even distribution
     for key in keys:
+        randNum = random.randrange(len(h5Files))
+
         # if there are less than 30 total instances of this space group, 
         # we add them to all of the .h5 files
         #breakpoint()
         if space_group_distribution[int(anH5File[key].attrs['space_group']) - 1] < 30:
             for h5File in h5Files:
-                anH5File.copy(key, h5File)
+                try:
+                    anH5File.copy(key, h5File)
+                except:
+                    print("sadBoi2")
         else:
             # Otherwise, we pseudorandomly distribute samples among the new files for a
             # roughly even distribution
-            randNum = random.randrange(len(h5Files))
             try:
                 anH5File.copy(key, h5Files[randNum])
-            except RuntimeError:
+            except:
                 print("sadBoi")
+
+        #print("{} now has {} groups".format(h5Files[randNum].name, len(list(h5Files[randNum].keys()))))
 
         # if the file is getting too large, we want to close it off and start a new file
         if len(list(h5Files[randNum].keys())) > 500:
-            oldName = h5Files[randNum].name
-            newName = r"{}{}.h5".format(oldName[:13], time.time())
+            print("{} is too fat. creating a new file".format(h5Files[randNum].name))
+            #oldName = h5Files[randNum].name
+            #newName = r"{}{}.h5".format(oldName[:13], time.time())
             h5Files[randNum].close()
-            newH5File = h5py.File(newName)
-            for i in range(len(h5Files)):
-                if h5Files[i].closed:
+            if randNum < 7:
+                newH5File = h5py.File("massagedTrain{}.h5".format(time.time()))
+                for i in range(7):
                     h5Files[i] = newH5File
-            
+            elif randNum == 7:
+                newH5File = h5py.File("massagedDevel{}.h5".format(time.time()))
+                h5Files[7] = newH5File
+            else:
+                newH5File = h5py.File("massagedTests{}.h5".format(time.time()))
+                h5Files[8] = newH5File
+            print("Created new .h5 file")
 
-    return
+    return h5Files
 
 
 def _setup_h5_datasets(h5_save_path, fileNames, fileRatios):
@@ -85,7 +98,7 @@ if __name__ == '__main__':
     # Directory we want to save new .h5 files to. Must end in /
     h5_save_path = ""
     # JSON file with the overall distribution in it
-    distribution_JSON_path = "../distributions/dataframes/overall_distribution.json"
+    distribution_JSON_path = "../distributions/functions/overall_distribution.json"
 
     # These are the .h5 files we want to create.
     # Final files will be at h5_save_path + "massaged" + fileNames + time + ".h5"
@@ -119,7 +132,7 @@ if __name__ == '__main__':
         for aFilePath in curFilePaths:
             try:
                 anH5File = h5py.File(aFilePath, 'r')
-                _distribute_dataset(anH5File, h5Files, space_group_distribution)
+                h5Files = _distribute_dataset(anH5File, h5Files, space_group_distribution)
                 print("Distributed {} across new datasets".format(aFilePath))
                 anH5File.close()
             except OSError:
