@@ -1,5 +1,5 @@
 ================================================================
-Towards a Universal Classifier for Crystallographic Space Groups
+Towards a Universal Classifier for Crystallographic Space Groups\ :sup:`1`
 ================================================================
 Addressing Space Group Imbalance in Large Crystallographic Datasets for Training a Neural Network.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -45,7 +45,7 @@ To further address the data imbalance, a combination of two techniques was used.
 
 (**2**) **Over-sampling**, synthetic data was generated to compensate for under-represented space groups. 
 
-As mentioned, an imbalanced dataset can be detrimental to the performance of a machine learning algorithm. Over-sampling of minority classes with the creation of synthetic minority class data is one method to deal with an imbalanced dataset. To this end, we propose using SMOTE (Synthetic Minority Over-Sampling Technique) \ :sup:`1`. With SMOTE, synthetic samples are generated using by taking the k nearest neighobors of a sample, and generating a random point along the line segment  between the sample in question and and the nearest neigbhors. Details of SMOTE is outlined in the referenced paper. We used the SMOTE implementation in Python's :code:`imbalanced-learn` package. 
+As mentioned, an imbalanced dataset can be detrimental to the performance of a machine learning algorithm. Over-sampling of minority classes with the creation of synthetic minority class data is one method to deal with an imbalanced dataset. To this end, we propose using SMOTE (Synthetic Minority Over-Sampling Technique) \ :sup:`2`. With SMOTE, synthetic samples are generated using by taking the k nearest neighobors of a sample, and generating a random point along the line segment  between the sample in question and and the nearest neigbhors. Details of SMOTE is outlined in the referenced paper. We used the SMOTE implementation in Python's :code:`imbalanced-learn` package. 
 
 .. image:: https://raw.githubusercontent.com/emilyjcosta5/datachallenge2/master/train/original.png
    :width: 1200
@@ -69,9 +69,9 @@ Shuto, talk about exploring over nets.
 
 References
 ~~~~~~~~~~
-https://smc-datachallenge.ornl.gov/challenges-2019/challenge-2-2019/
+[1] https://smc-datachallenge.ornl.gov/challenges-2019/challenge-2-2019/
 
-[1] Chawla, N. V., K. W. Bowyer, L. O. Hall, and W. P. Kegelmeyer. "SMOTE: Synthetic Minority Over-sampling Technique." Journal of Artificial Intelligence Research 16 (2002): 321-57. doi:10.1613/jair.953.
+[2] Chawla, N. V., K. W. Bowyer, L. O. Hall, and W. P. Kegelmeyer. "SMOTE: Synthetic Minority Over-sampling Technique." Journal of Artificial Intelligence Research 16 (2002): 321-57. doi:10.1613/jair.953.
 
 Affiliations
 ~~~~~~~~~~~~
