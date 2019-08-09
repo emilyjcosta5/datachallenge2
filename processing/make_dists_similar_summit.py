@@ -34,14 +34,14 @@ def _distribute_dataset(anH5File, h5Files, space_group_distribution):
         if space_group_distribution[int(anH5File[key].attrs['space_group']) - 1] < 30:
             for h5File in h5Files:
                 anH5File.copy(key, h5File)
-
-        # Otherwise, we pseudorandomly distribute samples among the new files for a
-        # roughly even distribution
-        randNum = random.randrange(len(h5Files))
-        try:
-            anH5File.copy(key, h5Files[randNum])
-        except RuntimeError:
-            print("sadBoi")
+        else:
+            # Otherwise, we pseudorandomly distribute samples among the new files for a
+            # roughly even distribution
+            randNum = random.randrange(len(h5Files))
+            try:
+                anH5File.copy(key, h5Files[randNum])
+            except RuntimeError:
+                print("sadBoi")
 
     return
 
