@@ -21,12 +21,6 @@ samples = [file[key] for key in keys]
 images=[]
 classes=[]
 
-fig, axes = plt.subplots(2,3, figsize=(24, 20))
-for ax, cbed in zip(axes.flatten()[:3], file["sample_2_1"]['cbed_stack']):
-    ax.imshow(cbed**0.25)
-plt.show()
-
-
 for sample in samples[:10]:
     images.append(sample['cbed_stack'][()].reshape(-1,1))
     classes.append(sample.attrs['space_group'].decode('UTF-8'))
@@ -36,7 +30,7 @@ for sample in samples[10:20]:
     classes.append(sample.attrs['space_group'].decode('UTF-8'))
 print(classes)
 
-fig, axes = plt.subplots(2,3, figsize=(24, 20))
+fig, axes = plt.subplots(2,3, figsize=(12, 10))
 for ax, cbed in zip(axes.flatten()[:3], samples[10]['cbed_stack']):
     ax.imshow(cbed**0.25)
 title = "Space Group: {} - Original".format(samples[10].attrs['space_group'].decode('UTF-8'))
@@ -60,7 +54,7 @@ print("length of images: {}".format(len(images)))
 print("length of images_final: {}".format(len(images_final)))
 listNum = random.sample(range(10,24), 4)
 print(listNum)
-fig, axes = plt.subplots(4, 3, figsize=(24, 20))
+fig, axes = plt.subplots(4, 3, figsize=(12, 10))
 for ax, cbed in zip(axes.flatten()[:3], images_final[listNum[0]]):
     ax.imshow(cbed**0.25)
 for ax, cbed in zip(axes.flatten()[3:], images_final[listNum[0]]):
