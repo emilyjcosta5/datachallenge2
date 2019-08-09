@@ -1,0 +1,116 @@
+Lmod has detected the following error: The following module(s) are unknown:
+"anaconda3"
+
+Please check the spelling or version number. Also try "module spider ..."
+It is also possible your cache file is out-of-date; it may help to try:
+  $ module --ignore-cache load "anaconda3"
+
+Also make sure that all modulefiles written in TCL start with the string
+#%Module
+
+
+
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/develBois/massagedDevel1565382437.0234532.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/develBois/massagedDevel1565382511.049635.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/develBois/massagedDevel1565382575.728802.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/develBois/massagedDevel1565382689.096516.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/develBois/massagedDevel1565382793.227416.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/develBois/massagedDevel1565382870.0574641.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/develBois/massagedDevel1565382937.2671216.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/develBois/massagedDevel1565383011.47615.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/develBois/massagedDevel1565383072.1922467.h5
+Dictionary created.
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382437.0234532.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382445.1821728.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382452.7740932.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382461.3632965.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382468.9306796.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382479.8735044.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382488.1055362.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382494.9354296.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382502.083765.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382510.4415104.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382519.0596342.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382527.0125725.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382535.6954472.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382541.9543424.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382561.7395406.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382571.3078701.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382581.0025258.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382588.330191.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382596.7326932.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382638.5578806.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382670.8561618.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382680.3113575.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382695.8617585.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382706.5227325.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382717.717318.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382727.087249.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382739.1710317.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382758.3278012.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382767.5506892.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382773.9304817.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382797.5641406.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382806.0700727.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382816.9549992.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382838.142581.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382857.80188.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382863.1197944.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382869.2349465.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382876.946575.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382885.4251575.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382892.2204957.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382899.5043437.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382905.723725.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382912.217386.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382921.8980281.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382929.3543487.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382943.493001.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382950.9129055.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382960.4222503.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382966.1219566.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382974.5204506.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382982.617395.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565382994.0553622.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565383002.2104228.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565383013.3819048.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565383026.0239265.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565383032.3893137.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565383046.724842.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565383054.0676713.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565383062.4194527.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565383077.9573834.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565383084.9756665.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565383091.8470254.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565383099.9960454.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565383112.400078.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565383120.325843.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/trainBois/massagedTrain1565383131.21772.h5
+Dictionary created.
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/testBois/massagedTests1565382437.0234532.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/testBois/massagedTests1565382510.256657.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/testBois/massagedTests1565382563.30572.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/testBois/massagedTests1565382692.397419.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/testBois/massagedTests1565382780.130678.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/testBois/massagedTests1565382851.404088.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/testBois/massagedTests1565382918.0536568.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/testBois/massagedTests1565382993.6093323.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/testBois/massagedTests1565383054.7931457.h5
+Found distribution of/gpfs/alpine/gen011/scratch/ecost020/datachallenge2/processing/redistH5Files/testBois/massagedTests1565383129.2842.h5
+Dictionary created.
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@batch3>
+Subject: Job 557118: <redist> in cluster <summit> Done
+
+Job <redist> was submitted from host <login2> by user <ecost020> in cluster <summit> at Fri Aug  9 16:54:38 2019
+Job was executed on host(s) <1*batch3>, in queue <batch>, as user <ecost020> in cluster <summit> at Fri Aug  9 16:54:41 2019
+                            <42*g10n01>
+</ccs/home/ecost020> was used as the home directory.
+</gpfs/alpine/gen011/scratch/ecost020/datachallenge2> was used as the working directory.
+Started at Fri Aug  9 16:54:41 2019
+Terminated at Fri Aug  9 17:02:36 2019
+Results reported at Fri Aug  9 17:02:36 2019
+
+The output (if any) is above this job summary.
+
