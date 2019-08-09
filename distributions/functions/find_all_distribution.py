@@ -70,8 +70,10 @@ def visualize_all_bar(df,headers,colors,file_name='all_dist_hist',ylim=None):
     plt.style.use('seaborn-darkgrid')
     if not ylim is None:
         plt.ylim(ylim)
-    for header,color in zip(headers,colors):
-        plt.bar(x,df[header],color=color,label=header,log=True)
+    for header,color,arr in zip(headers,colors,arrs):
+        print(arr)
+        #print(df[header])
+        plt.bar(x, arr, color=color,label=header,log=True)
     plt.legend()
     plt.title=("Distribution of Space Groups in Datasets")
     plt.xlabel('Space Group')
@@ -109,10 +111,12 @@ def visualize_all(df,headers,colors,file_name='all_distribution',ylim=None):
     plt.savefig('{}.png'.format(file_name))
 
 if __name__ == '__main__':
-     files = ['distribution.json', 'distributionDev.json', 'distributionTest.json']
-     arrs = [convert_JSON_to_arr(file) for file in files]
-     headers = ['Train', 'Dev', 'Test']
-     colors = ['cornflowerblue','crimson','orchid']
-     df = create_df(headers,arrs)
-     visualize_all_bar(df,headers,colors,file_name='distributions_bar_log')
+    files = ['train_redist.json', 'dev_redist.json', 'test_redist.json']
+    arrs = [convert_JSON_to_arr(file) for file in files]
+    #print(arrs.shape)
+    headers = ['Train Redistributed', 'Dev Redistributed', 'Test Redistributed']
+    colors = ['cornflowerblue','crimson','orchid']
+    df = create_df(headers,arrs)
+    save_pd_to_csv(df)
+    visualize_all_bar(arrs,headers,colors,file_name='redistributions_bar_log')
     
