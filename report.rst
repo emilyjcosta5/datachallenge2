@@ -44,14 +44,13 @@ To further address the data imbalance, a combination of two techniques was used.
 A balance of under-sampling and 
 In the case of the crystallograhy multi-classes (230 classes!), a strategy would be to find a medium between strategy 1 and 2. One might slowly reduce the excess datapoints of over-represented class until performance drops below some threshold for the 20 (or so) largest classes. After that, over-sampling can be done to bring under-represented classes to the same level of representation.
 
-
-.. image:: https://raw.githubusercontent.com/emilyjcosta5/datachallenge2/master/train/original.png
-  :align: center
-  :alt: Figure 2. Subset of original data from Space Group 2
   
-.. image:: https://raw.githubusercontent.com/emilyjcosta5/datachallenge2/master/train/generated.png
-  :align: center
-  :alt: Figure 2. Generated data using SMOTE of Space Group 2
+ .. raw:: html
+   <img src="https://raw.githubusercontent.com/emilyjcosta5/datachallenge2/master/train/original.png" align="center">
+     
+ .. raw:: html
+   <img src="https://raw.githubusercontent.com/emilyjcosta5/datachallenge2/master/train/generated.png" align="center">
+
 
 
 
