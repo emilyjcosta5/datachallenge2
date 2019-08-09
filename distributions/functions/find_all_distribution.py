@@ -70,8 +70,14 @@ def visualize_all_bar(df,headers,colors,file_name='all_dist_hist',ylim=None):
     plt.style.use('seaborn-darkgrid')
     if not ylim is None:
         plt.ylim(ylim)
+    prevTop = np.zeros(230)
+    inspectPix = 49
+    print("printout for pixel {}".format(inspectPix))
     for header,color in zip(headers,colors):
-        plt.bar(x,df[header],color=color,label=header,log=True)
+        plt.bar(x,df[header],bottom=prevTop,color=color,label=header,log=True)
+        #breakpoint()
+        print("{} bottom: {}, value: {}".format(header, prevTop[inspectPix], df[header][inspectPix]))
+        prevTop += df[header]
     plt.legend()
     plt.title=("Distribution of Space Groups in Datasets")
     plt.xlabel('Space Group')
@@ -109,10 +115,11 @@ def visualize_all(df,headers,colors,file_name='all_distribution',ylim=None):
     plt.savefig('{}.png'.format(file_name))
 
 if __name__ == '__main__':
-     files = ['train_redist.json', 'dev_redist.json', 'test_redist.json']
-     arrs = [convert_JSON_to_arr(file) for file in files]
-     headers = ['Train', 'Dev', 'Test']
-     colors = ['cornflowerblue','crimson','orchid']
-     df = create_df(headers,arrs)
-     visualize_all_bar(df,headers,colors,file_name='distributions_bar_log')
+    #files = ['../dataframes/estDistTrain.json', '../dataframes/estDistDev.json', '../dataframes/estDistTest.json']
+    files = ['train_redist.json', 'dev_redist.json', 'test_redist.json']
+    arrs = [convert_JSON_to_arr(file) for file in files]
+    headers = ['Train', 'Dev', 'Test']
+    colors = ['cornflowerblue','crimson','orchid']
+    df = create_df(headers,arrs)
+    visualize_all_bar(df,headers,colors,file_name='distributions_bar_log')
     
