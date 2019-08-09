@@ -21,13 +21,13 @@ samples = [file[key] for key in keys]
 images=[]
 classes=[]
 
-for sample in samples[:10]:
+for sample in samples[:20]:
     images.append(sample['cbed_stack'][()].reshape(-1,1))
     classes.append(sample.attrs['space_group'].decode('UTF-8'))
 
-for sample in samples[10:20]:
-    images.append(sample['cbed_stack'][()].reshape(-1,1))
-    classes.append(sample.attrs['space_group'].decode('UTF-8'))
+# for sample in samples[10:20]:
+#     images.append(sample['cbed_stack'][()].reshape(-1,1))
+#     classes.append(sample.attrs['space_group'].decode('UTF-8'))
 print(classes)
 
 fig, axes = plt.subplots(2,3, figsize=(12, 10))
@@ -52,7 +52,7 @@ for image_rest_list in image_rest_list:
 
 print("length of images: {}".format(len(images)))
 print("length of images_final: {}".format(len(images_final)))
-listNum = random.sample(range(10,24), 4)
+listNum = random.sample(range(20,25), 4)
 print(listNum)
 fig, axes = plt.subplots(4, 3, figsize=(12, 10))
 for ax, cbed in zip(axes.flatten()[:3], images_final[listNum[0]]):
@@ -66,6 +66,7 @@ for ax, cbed in zip(axes.flatten()[9:], images_final[listNum[0]]):
 title = "Space Group: {} - Generated".format(classes_res[listNum[0]])
 fig.suptitle(title, size=40)
 plt.savefig('generated.png')
+
 
 
 # print("Original data of class{}: {}".format(classes[-1], samples[-1]['cbed_stack'][()]))
