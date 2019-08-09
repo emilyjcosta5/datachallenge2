@@ -19,10 +19,11 @@ Addressing the Data Imbalance
 
 The main focus of this project was to balance the dataset to optimize the performance and accurancy of the neural network. The overall representation of datasets exhibited a significant data imbalance. The average space group representation of the overall dataset was 814 images per space group, while the 25th percentile average was only 23 images per space group. 
 
-Figure 1.
 .. image:: https://raw.githubusercontent.com/emilyjcosta5/datachallenge2/master/distributions/graphs/distributions_bar_log.png
   :width: 400
-  :alt: Original Distribution
+  :alt: Figure 1. Original Distribution
+  
+Figure 1.
   
 **Redistributing the Original Dataset**
 
