@@ -22,8 +22,8 @@ The main focus of this project was to balance the dataset to optimize the perfor
 .. image:: https://raw.githubusercontent.com/emilyjcosta5/datachallenge2/master/distributions/graphs/distributions_bar_log.png
   :width: 2000
   :alt: Figure 1. Original Distribution
-  
-  Figure 1.
+
+Figure 1. Original Distribution
 
 **Redistributing the Original Dataset**
 
