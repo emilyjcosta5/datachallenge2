@@ -12,7 +12,7 @@ In machine learning, imbalanced datasets can cause bias in the results of the al
 Machine Learning for Space Group Classification of CBED data
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Model evaluation benchmark with ResNet-50**
-We used the Deep Residual Network with 50 layers so called the ResNet-50\ :sup:`2'  to benchmark our classification performance. The ResNet-50 is one of the most popular neural networks for image classification tasks. The code for this experiment is available under the pytorch directory of this repository.
+ Deep Residual Network with 50 layers, commonly referred to the ResNet-50\ :sup:`2`,  to benchmark our classification performance. The ResNet-50 is one of the most popular neural networks for image classification tasks. The code for this experiment is available under the pytorch directory of this repository.
 
 Addressing the Data Imbalance
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
