@@ -45,8 +45,7 @@ To further address the data imbalance, a combination of two techniques was used.
 
 (**2**) **Over-sampling**, synthetic data was generated to compensate for under-represented space groups. 
 
-As mentioned, an imbalanced dataset can be detrimental to the performance of a machine learning algorithm. Over-sampling of minority classes with the creation of synthetic minority class data is one method to deal with an imbalanced dataset. To this end, we propose using SMOTE (Synthetic Minority Over-Sampling Technique) \ :sup:`3`. With SMOTE, synthetic samples are generated using by taking the k nearest neighobors of a sample, and generating a random point along the line segment  between the sample in question and and the nearest neigbhors. Details of SMOTE is outlined in the referenced paper. We used the SMOTE implementation in Python's :code:`imbalanced-learn` package. 
-A balance of under-sampling and 
+As mentioned, an imbalanced dataset can be detrimental to the performance of a machine learning algorithm. Over-sampling of minority classes with the creation of synthetic minority class data is one method to deal with an imbalanced dataset. To this end, we propose using SMOTE (Synthetic Minority Over-Sampling Technique) \ :sup:`2`. With SMOTE, synthetic samples are generated using by taking the k nearest neighobors of a sample, and generating a random point along the line segment  between the sample in question and and the nearest neigbhors. Details of SMOTE is outlined in the referenced paper. We used the SMOTE implementation in Python's :code:`imbalanced-learn` package. 
 
 .. image:: https://raw.githubusercontent.com/emilyjcosta5/datachallenge2/master/train/original.png
    :width: 1200
