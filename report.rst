@@ -84,6 +84,7 @@ Affiliations
 \ :sup:`d` Center for Nanophase Materials Sciences, Oak Ridge National Laboratory, Oak Ridge, TN 37831, USA
 \ :sup:`e` Department of Mathematics, Computer Science, Grinnell College, Grinnell, IA 50112, USA
 \ :sup:`f` Department of Computer Science, DePauw University, Greencastle, IN 46135, USA
+
 Acknowledgements
 ~~~~~~~~~~~~~~~~
 This project was supported in part by an appointment to the Science Education and Workforce Development Programs at Oak Ridge National Laboratory, administered by ORISE through the U.S. Department of Energy Oak Ridge Institute for Science and Education.
