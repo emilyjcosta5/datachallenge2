@@ -5,13 +5,14 @@ Towards a Universal Classifier for Crystallographic Space Groups\ :sup:`1`
 Addressing Space Group Imbalance in Large Crystallographic Datasets for Training a Neural Network.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 :Contributors: Emily Costa\ :sup:`ab`, Alvin Tan\ :sup:`cd`, Yuya Kawakami\ :sup:`ae`, Shuto Araki\ :sup:`af`
+:Video: http://bit.ly/smc_conference
 
 In machine learning, imbalanced datasets can cause bias in the results of the algorithm. In order to achieve excellent performance, the datasets are processed before being run through the machine learning algorithm. Typically, in solving a neural network, more data is better. However, if that dataset is large enough and unnecessary, it is possible to reduce the dataset without greatly compromising the performance of the trained system. The two issues our group addressed in our research are (**1**) developing a machine learning algorithm for space group classification of CBED data and (**2**) implementing proper machine learning techniques to overcome data imbalance and show how it affects the performance of the machine learning algorithm. 
 
 Machine Learning for Space Group Classification of CBED data
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Model evaluation benchmark with ResNet-50**
-We used the Deep Residual Network with 50 layers so called the ResNet-50 (He, et al. 2015) to benchmark our classification performance. The ResNet-50 is one of the most popular neural networks for image classification tasks. The code for this experiment is available under the pytorch directory of this repository.
+We used the Deep Residual Network with 50 layers so called the ResNet-50\ :sup:`2'  to benchmark our classification performance. The ResNet-50 is one of the most popular neural networks for image classification tasks. The code for this experiment is available under the pytorch directory of this repository.
 
 Addressing the Data Imbalance
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -43,7 +44,7 @@ To further address the data imbalance, a combination of two techniques was used.
 
 (**2**) **Over-sampling**, synthetic data was generated to compensate for under-represented space groups. 
 
-As mentioned, an imbalanced dataset can be detrimental to the performance of a machine learning algorithm. Over-sampling of minority classes with the creation of synthetic minority class data is one method to deal with an imbalanced dataset. To this end, we propose using SMOTE (Synthetic Minority Over-Sampling Technique) \ :sup:`2`. With SMOTE, synthetic samples are generated using by taking the k nearest neighobors of a sample, and generating a random point along the line segment  between the sample in question and and the nearest neigbhors. Details of SMOTE is outlined in the referenced paper. We used the SMOTE implementation in Python's :code:`imbalanced-learn` package. 
+As mentioned, an imbalanced dataset can be detrimental to the performance of a machine learning algorithm. Over-sampling of minority classes with the creation of synthetic minority class data is one method to deal with an imbalanced dataset. To this end, we propose using SMOTE (Synthetic Minority Over-Sampling Technique) \ :sup:`3`. With SMOTE, synthetic samples are generated using by taking the k nearest neighobors of a sample, and generating a random point along the line segment  between the sample in question and and the nearest neigbhors. Details of SMOTE is outlined in the referenced paper. We used the SMOTE implementation in Python's :code:`imbalanced-learn` package. 
 A balance of under-sampling and 
 
 .. image:: https://raw.githubusercontent.com/emilyjcosta5/datachallenge2/master/train/original.png
@@ -62,16 +63,18 @@ Future Work
 ~~~~~~~~~~~
 The SMOTE implementation in the :code:`imbalanced-learn` package allows users to specify the number of synthetic data to generate via a python dictionary. Since this dictates the degree to which we oversample, this is a critical hyperparameter to tune. Furthermore, the number of neighbors that SMOTE uses to generate synthetic data can be specified as an argument (We have used 6 in our example). Further work will include tuning these parameters. 
 
-We hope to explore more models made for this Crystallography classification tasks such as DefectNet created by Pycroscopy.
+Future work also includes exploring more models made for Crystallography classification, such as DefectNet created by the Pycroscopy\ :sup:`4`.
 
 References
 ~~~~~~~~~~
 [1] https://smc-datachallenge.ornl.gov/challenges-2019/challenge-2-2019/
 https://smc-datachallenge.ornl.gov/challenges-2019/challenge-2-2019/
 
-[2] Chawla, N. V., K. W. Bowyer, L. O. Hall, and W. P. Kegelmeyer. "SMOTE: Synthetic Minority Over-sampling Technique." Journal of Artificial Intelligence Research 16 (2002): 321-57. doi:10.1613/jair.953.
+[2] He, K., Zhang, X., Ren, S., & Sun, J. (2015). Deep residual learning for imagerecognition.CoRR,abs/1512.03385. Retrieved from http://arxiv.org/abs/1512.03385
 
-[3] He, K., Zhang, X., Ren, S., & Sun, J. (2015). Deep residual learning for imagerecognition.CoRR,abs/1512.03385. Retrieved from http://arxiv.org/abs/1512.03385
+[4] Chawla, N. V., K. W. Bowyer, L. O. Hall, and W. P. Kegelmeyer. "SMOTE: Synthetic Minority Over-sampling Technique." Journal of Artificial Intelligence Research 16 (2002): 321-57. doi:10.1613/jair.953.
+
+[4]  Pycroscopy: Scientific analysis of nanoscale materials imaging data, https://pycroscopy.github.io/pycroscopy/about.html
 
 Affiliations
 ~~~~~~~~~~~~
