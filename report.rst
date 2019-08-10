@@ -55,6 +55,7 @@ Figure 4. Synthetic Data
 
 Figures 3 and 4 are examples of a SMOTE generated data and the original data from which SMOTE was generated. To generate the synthetic data, 10 sample images in Space Group 2 were given to SMOTE to generate 5 synthetic samples. Depcited are 2 of the original data and 4 of the generated data.
 
+Machine Learning for Space Group Classification of CBED data
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Model evaluation benchmark with ResNet-50**
 
