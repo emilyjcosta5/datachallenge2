@@ -12,12 +12,35 @@ In machine learning, imbalanced datasets can cause bias in the results of the al
 Machine Learning for Space Group Classification of CBED data
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Model evaluation benchmark with ResNet-50**
- Deep Residual Network with 50 layers, commonly referred to the ResNet-50\ :sup:`2`,  to benchmark our classification performance. The ResNet-50 is one of the most popular neural networks for image classification tasks. The code for this experiment is available under the pytorch directory of this repository.
+
+Deep Residual Network with 50 layers, commonly referred to as the ResNet-50\ :sup:`2`, to benchmark our classification performance. The ResNet-50 is one of the most popular convolutional neural networks for image classification tasks. 
+
+We compared results before and after the data imbalance techniques mentioned below are applied, with everything else constant. Due to our time constraints, we could only implement this one model. Hence, this project is mainly focused on the data imbalance techniques rather than the development of specific machine learning models. In this project, the ResNet-50 rather serves as a benchmark for further exploration of different models in the future.
+
+Model specification: 
+
+:Batch Size: 128
+:Epochs: 90
+:Learning Rate: 0.01
+:Momentum: 0.9
+:Weight Decay: 0.00005
+:Loss Function: Cross Entropy
+
+
+(**1**) **Before Redistribution**
+
+The evaluation accuracy suffered from the heavy data imbalance mentioned below and ended up being only about 2.7% accuracy. While this result is better than random chance (1/230 ~ 0.43%), it barely learned any patterns in the data partially because some images in the test dataset included classes that do not exist in the training dataset.
+
+(**2**) **After Redistribution**
+
+The evalution accuracy improved to 23.5%, which is close to 10x higher than the non-processed data. While this accuracy is still not high enough to be a useful classifier, it shows the effectiveness of the data imbalance techniques explained in the next section.
+
+Furthermore, the model is by no means properly tuned (and therefore has a signicant room for improvement), but the redistribution of the imbalanced classes and SMOTE mentioned below shows significant improvement. The code for this experiment is available under the :code:`pytorch` directory of this repository.
 
 Addressing the Data Imbalance
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The main focus of this project was to balance the dataset to optimize the performance and accurancy of the neural network. The overall representation of datasets exhibited a significant data imbalance. The average space group representation of the overall dataset was 814 images per space group, while the 25th percentile average was only 23 images per space group. The distribution of the original data can be seen in Figure 1. The balancing of this data occurred in two stage, (**1**) redistributing the original dataset in order to represent all space groups in the training dataset for the neural network and (**2**) balancing the overall data using various techniques to represent space groups evenly in the training dataset in order to minimize bias in the neural network. 
+The main focus of this project was to balance the dataset to optimize the performance and accurancy of the neural network. The overall representation of datasets exhibited a significant data imbalance. The average space group representation of the overall dataset was 814 images per space group, while the 25th percentile average was only 23 images per space group. The distribution of the original data can be seen in Figure 1. The balancing of this data occurred in two stages, (**1**) redistributing the original dataset in order to represent all space groups in the training dataset for the neural network and (**2**) balancing the overall data using various techniques to represent space groups evenly in the training dataset in order to minimize bias in the neural network. 
 
 .. image:: https://raw.githubusercontent.com/emilyjcosta5/datachallenge2/master/distributions/graphs/distributions_bar_log.png
   :width: 2000
