@@ -19,10 +19,11 @@ Addressing the Data Imbalance
 
 The main focus of this project was to balance the dataset to optimize the performance and accurancy of the neural network. The overall representation of datasets exhibited a significant data imbalance. The average space group representation of the overall dataset was 814 images per space group, while the 25th percentile average was only 23 images per space group. The distribution of the original data can be seen in Figure 1. The balancing of this data occurred in two stage, (**1**) redistributing the original dataset in order to represent all space groups in the training dataset for the neural network and (**2**) balancing the overall data using various techniques to represent space groups evenly in the training dataset in order to minimize bias in the neural network. 
 
-Figure 1.
 .. image:: https://raw.githubusercontent.com/emilyjcosta5/datachallenge2/master/distributions/graphs/distributions_bar_log.png
   :width: 2000
   :alt: Figure 1. Original Distribution
+  
+  Figure 1.
 
 **Redistributing the Original Dataset**
 
@@ -87,4 +88,5 @@ Affiliations
 Acknowledgements
 ~~~~~~~~~~~~~~~~
 This project was supported in part by an appointment to the Science Education and Workforce Development Programs at Oak Ridge National Laboratory, administered by ORISE through the U.S. Department of Energy Oak Ridge Institute for Science and Education.
+
 This project used resources of the Oak Ridge Leadership Computing Facility (OLCF), which is a DOE Office of Science User Facility and the Compute and Data Environment for Science (CADES) at the Oak Ridge National Laboratory supported by the U.S. Department of Energy under Contract No. DE-AC05-00OR22725.
