@@ -53,9 +53,8 @@ Figure 3. Original Data
 
 Figure 4. Synthetic Data
 
-The above images are examples of a SMOTE generated data and the original data from which SMOTE was generated. In the above example, 10 samples of images in Space Group 2 were given to SMOTE to generate 5 synthetic sample. 2 of the original data and 4 of the generated data is shown as an example.  Due to the heavy data imbalance in the dataset and time constraints, it was challenging to increase the model accuracy and took significant amount of engineering effort in order to feed all the data properly. Even after 90 epochs, the model performed very poorly with the evaluation accuracy still stayed at around 2%. With the SMOTE, the evaluation accuracy went up to about 23%, which is a significant improvement but not high enough to be useful.
+Figures 3 and 4 are examples of a SMOTE generated data and the original data from which SMOTE was generated. To generate the synthetic data, 10 sample images in Space Group 2 were given to SMOTE to generate 5 synthetic samples. Depcited are 2 of the original data and 4 of the generated data.
 
-Machine Learning for Space Group Classification of CBED data
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Model evaluation benchmark with ResNet-50**
 
