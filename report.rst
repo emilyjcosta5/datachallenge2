@@ -6,36 +6,9 @@ Addressing Space Group Imbalance in Large Crystallographic Datasets for Training
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 :Contributors: Emily Costa\ :sup:`ab`, Alvin Tan\ :sup:`cd`, Yuya Kawakami\ :sup:`ae`, Shuto Araki\ :sup:`af`
 :Video: http://bit.ly/smc_conference
+:Github Repo: https://github.com/emilyjcosta5/datachallenge2
 
-In machine learning, imbalanced datasets can cause bias in the results of the algorithm. In order to achieve excellent performance, the datasets are processed before being run through the machine learning algorithm. Typically, in solving a neural network, more data is better. However, if that dataset is large enough and unnecessary, it is possible to reduce the dataset without greatly compromising the performance of the trained system. The two issues our group addressed in our research are (**1**) developing a machine learning algorithm for space group classification of CBED data and (**2**) implementing proper machine learning techniques to overcome data imbalance and show how it affects the performance of the machine learning algorithm. 
-
-Machine Learning for Space Group Classification of CBED data
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-**Model evaluation benchmark with ResNet-50**
-
-Deep Residual Network with 50 layers, commonly referred to as the ResNet-50\ :sup:`2`, to benchmark our classification performance. The ResNet-50 is one of the most popular convolutional neural networks for image classification tasks. 
-
-We compared results before and after the data imbalance techniques mentioned below are applied, with everything else constant. Due to our time constraints, we could only implement this one model. Hence, this project is mainly focused on the data imbalance techniques rather than the development of specific machine learning models. In this project, the ResNet-50 rather serves as a benchmark for further exploration of different models in the future.
-
-Model specification: 
-
-:Batch Size: 128
-:Epochs: 90
-:Learning Rate: 0.01
-:Momentum: 0.9
-:Weight Decay: 0.00005
-:Loss Function: Cross Entropy
-
-
-(**1**) **Before Redistribution**
-
-The evaluation accuracy suffered from the heavy data imbalance mentioned below and ended up being only about 2.7% accuracy. While this result is better than random chance (1/230 ~ 0.43%), it barely learned any patterns in the data partially because some images in the test dataset included classes that do not exist in the training dataset.
-
-(**2**) **After Redistribution**
-
-The evalution accuracy improved to 23.5%, which is close to 10x higher than the non-processed data. While this accuracy is still not high enough to be a useful classifier, it shows the effectiveness of the data imbalance techniques explained in the next section.
-
-Furthermore, the model is by no means properly tuned (and therefore has a signicant room for improvement), but the redistribution of the imbalanced classes and SMOTE mentioned below shows significant improvement. The code for this experiment is available under the :code:`pytorch` directory of this repository.
+In machine learning, imbalanced datasets can cause bias in the results of the algorithm. In order to achieve excellent performance, the datasets are processed before being run through the machine learning algorithm. Typically, in solving a neural network, more data is better. However, if that dataset is large enough and unnecessary, it is possible to reduce the dataset without greatly compromising the performance of the trained system. The two issues our group addressed in our research are (**1**) implementing proper machine learning techniques to overcome data imbalance and show how it affects the performance of the machine learning algorithm and (**2**)  developing a machine learning algorithm for space group classification of CBED data.
 
 Addressing the Data Imbalance
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -81,6 +54,34 @@ Figure 3. Original Data
 Figure 4. Synthetic Data
 
 The above images are examples of a SMOTE generated data and the original data from which SMOTE was generated. In the above example, 10 samples of images in Space Group 2 were given to SMOTE to generate 5 synthetic sample. 2 of the original data and 4 of the generated data is shown as an example.  Due to the heavy data imbalance in the dataset and time constraints, it was challenging to increase the model accuracy and took significant amount of engineering effort in order to feed all the data properly. Even after 90 epochs, the model performed very poorly with the evaluation accuracy still stayed at around 2%. With the SMOTE, the evaluation accuracy went up to about 23%, which is a significant improvement but not high enough to be useful.
+
+Machine Learning for Space Group Classification of CBED data
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Model evaluation benchmark with ResNet-50**
+
+Deep Residual Network with 50 layers, commonly referred to as the ResNet-50\ :sup:`2`, to benchmark our classification performance. The ResNet-50 is one of the most popular convolutional neural networks for image classification tasks. 
+
+We compared results before and after the data imbalance techniques mentioned below are applied, with everything else constant. Due to our time constraints, we could only implement this one model. Hence, this project is mainly focused on the data imbalance techniques rather than the development of specific machine learning models. In this project, the ResNet-50 rather serves as a benchmark for further exploration of different models in the future.
+
+Model specification: 
+
+:Batch Size: 128
+:Epochs: 90
+:Learning Rate: 0.01
+:Momentum: 0.9
+:Weight Decay: 0.00005
+:Loss Function: Cross Entropy
+
+
+(**1**) **Before Redistribution**
+
+The evaluation accuracy suffered from the heavy data imbalance mentioned below and ended up being only about 2.7% accuracy. While this result is better than random chance (1/230 ~ 0.43%), it barely learned any patterns in the data partially because some images in the test dataset included classes that do not exist in the training dataset.
+
+(**2**) **After Redistribution**
+
+The evalution accuracy improved to 23.5%, which is close to 10x higher than the non-processed data. While this accuracy is still not high enough to be a useful classifier, it shows the effectiveness of the data imbalance techniques explained in the next section.
+
+Furthermore, the model is by no means properly tuned (and therefore has a signicant room for improvement), but the redistribution of the imbalanced classes and SMOTE mentioned below shows significant improvement. The code for this experiment is available under the :code:`pytorch` directory of this repository.
 
 Future Work 
 ~~~~~~~~~~~
