@@ -68,7 +68,6 @@ Future work also includes exploring more models made for Crystallography classif
 References
 ~~~~~~~~~~
 [1] https://smc-datachallenge.ornl.gov/challenges-2019/challenge-2-2019/
-https://smc-datachallenge.ornl.gov/challenges-2019/challenge-2-2019/
 
 [2] He, K., Zhang, X., Ren, S., & Sun, J. (2015). Deep residual learning for imagerecognition.CoRR,abs/1512.03385. Retrieved from http://arxiv.org/abs/1512.03385
 
@@ -79,10 +78,15 @@ https://smc-datachallenge.ornl.gov/challenges-2019/challenge-2-2019/
 Affiliations
 ~~~~~~~~~~~~
 \ :sup:`a` Advanced Data and Workflows Group, National Center for Computational Sciences, Oak Ridge, TN 37831, USA
+
 \ :sup:`b` Department of Mathematics, Florida International University, Miami, FL 33199, USA
+
 \ :sup:`c` Department of Electrical and Computer Engineering, Northwestern University, Evanston, IL 60208, USA
+
 \ :sup:`d` Center for Nanophase Materials Sciences, Oak Ridge National Laboratory, Oak Ridge, TN 37831, USA
+
 \ :sup:`e` Department of Mathematics, Computer Science, Grinnell College, Grinnell, IA 50112, USA
+
 \ :sup:`f` Department of Computer Science, DePauw University, Greencastle, IN 46135, USA
 
 Acknowledgements
